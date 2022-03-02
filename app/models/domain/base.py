@@ -22,7 +22,7 @@ class Info(BaseModel):
 
 
 class PermissionId(BaseModel):
-    id_permission: int = Field(alias='id_permission')
+    id_permission: int = Field(None, alias='id_permission')
 
 
 class CommentsId(BaseModel):

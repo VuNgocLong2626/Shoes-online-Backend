@@ -14,6 +14,9 @@ class PermissionDetail(
 ):
     pass
 
+    class Config:
+        orm_mode = True
+
 
 class PermissionUpdate(
                     _base.PermissionId,

@@ -28,13 +28,16 @@ class Info(Base):
 class Permission(Base):
     __tablename__ = "permission"
 
-    id_permission = Column(Integer, primary_key=True, index=True)
+    id_permission = Column(Integer, primary_key=True)
     name = Column(String(250), unique=True)
-
+    
     user = relationship("User", 
                     back_populates="permission",
                     cascade="all, delete",
                     passive_deletes=True)
+
+    # def __init__(self, name):
+    #     self.name = name
 
 
 class NameServices(Base):
@@ -79,37 +82,6 @@ class UserServices(Base):
     user = relationship("User", back_populates="userservices")
 
 
-class User(Base):
-    __tablename__ = "user"
-
-    id_user = Column(Integer, primary_key=True, index=True)
-    id_info = Column(Integer, ForeignKey('info.id_info', ondelete="CASCADE"))
-    id_permission = Column(Integer, ForeignKey('permission.id_permission', ondelete="CASCADE"))
-
-    account = Column(String(250), unique=True)
-    password = Column(String(250))
-
-    info = relationship("Info", back_populates="user")
-    permission = relationship("Permission", back_populates="user")
-    services = relationship("Services", 
-                            back_populates="user",
-                            cascade="all, delete",
-                            passive_deletes=True)
-    userservices = relationship("UserServices", 
-                                back_populates="user",
-                                cascade="all, delete",
-                                passive_deletes=True)
-    bill_verification = relationship("Bill", 
-                                back_populates="verifier",
-                                cascade="all, delete",
-                                passive_deletes=True)
-    bill_create = relationship("Bill", 
-                                back_populates="user",
-                                cascade="all, delete",
-                                passive_deletes=True)
-    comments = relationship("Comments", back_populates="user")
-    
-
 ##    
 class Bill(Base):
     __tablename__ = "bill"
@@ -123,13 +95,46 @@ class Bill(Base):
     total = Column(String(250))
     method = Column(String(250))
 
-    user = relationship("User", back_populates="bill_create")
-    verifier = relationship("User", back_populates="bill_verification")
+    user = relationship("User", back_populates="bill_create", foreign_keys=[id_user])
+    verifier = relationship("User", back_populates="bill_verification", foreign_keys=[id_verifier])
     bill_details = relationship("BillDetails", 
                             back_populates="bill",
                             cascade="all, delete",
                             passive_deletes=True)
-    
+
+
+class User(Base):
+    __tablename__ = "user"
+
+    id_user = Column(Integer, primary_key=True, index=True)
+    id_info = Column(Integer, ForeignKey('info.id_info', ondelete="CASCADE"))
+    id_permission = Column(Integer, ForeignKey('permission.id_permission', ondelete="CASCADE"))
+
+
+    account = Column(String(250), unique=True)
+    password = Column(String(250))
+
+    comments = relationship("Comments", back_populates="user")
+    info = relationship("Info", back_populates="user")
+    permission = relationship("Permission", back_populates="user")
+    bill_verification = relationship("Bill", 
+                                back_populates="verifier",
+                                cascade="all, delete",
+                                passive_deletes=True,
+                                foreign_keys=[Bill.id_verifier])
+    bill_create = relationship("Bill", 
+                                back_populates="user",
+                                cascade="all, delete",
+                                passive_deletes=True,
+                                foreign_keys=[Bill.id_user])
+    services = relationship("Services", 
+                            back_populates="user",
+                            cascade="all, delete",
+                            passive_deletes=True)
+    userservices = relationship("UserServices", 
+                                back_populates="user",
+                                cascade="all, delete",
+                                passive_deletes=True)
 
 
 class Comments(Base):
