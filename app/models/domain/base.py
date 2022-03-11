@@ -6,7 +6,7 @@ class UserId(BaseModel):
 
 
 class NameServicesId(BaseModel):
-    id_name_services: int = Field(alias='id_name_services')
+    id_name_services: int = Field(None, alias='id_name_services')
 
 
 class ServicesId(BaseModel):
@@ -17,8 +17,8 @@ class BillId(BaseModel):
     id_bill: int = Field(alias='id_bill')
 
 
-class Info(BaseModel):
-    id_info: int = Field(alias='id_info')
+class InfoId(BaseModel):
+    id_info: int = Field(None, alias='id_info')
 
 
 class PermissionId(BaseModel):
