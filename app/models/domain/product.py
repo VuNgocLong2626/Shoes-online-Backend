@@ -12,10 +12,3 @@ class ProductDetail(BaseModel):
 class ProductMoney(BaseModel):
     money: str = Field(alias='money')
 
-
-class ProductQuantilySold(BaseModel):
-    quantity_sold: str = Field(alias='quantity_sold')
-
-
-class ProductQuantily(BaseModel):
-    quantily: str = Field(alias='quantily')

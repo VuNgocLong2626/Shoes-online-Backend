@@ -6,8 +6,16 @@ class ImagePath(BaseModel):
 
 
 class SizeNumber(BaseModel):
-    number: int = Field(alias='size_number')
+    size_number: int = Field(alias='size_number')
 
 
 class ColorHex(BaseModel):
     hex: str = Field(alias='hex')
+
+
+class ProductCurrentPrice(BaseModel):
+    quantity_sold: str = Field(alias='current_price')
+
+
+class ProductQuantily(BaseModel):
+    quantily: str = Field(alias='quantily')
