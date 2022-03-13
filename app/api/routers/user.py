@@ -1,4 +1,5 @@
 from fastapi import APIRouter, Depends
+from fastapi.security import OAuth2PasswordRequestForm
 from app.services.user import UserServices
 from app.models.schemas import (
                                 user as _user_schemas,
@@ -13,6 +14,10 @@ router = router = APIRouter(
     responses={404: {"description": "Not found"}}
 )
 
+@router.post("/login-form")
+async def login_form(form_data: OAuth2PasswordRequestForm = Depends()):
+    respon = UserServices.login_form(form_data)
+    return respon
 
 @router.post("/log_in")
 async def get_user(user_in: _user_schemas.UserLogin):

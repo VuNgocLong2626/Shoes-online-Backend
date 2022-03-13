@@ -13,7 +13,7 @@ ALGORITHM = "HS256"
 
 bcrypt_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 
-oauth2_bearer = OAuth2PasswordBearer(tokenUrl="token")
+oauth2_bearer = OAuth2PasswordBearer(tokenUrl="user/log_in-form")
 
 
 def get_password_hash(password):
@@ -43,7 +43,9 @@ def create_access_token(user_in: _usertoken_schemas,
 
 async def get_current_user(token: str = Depends(oauth2_bearer)):
     try:
+        print(token)
         payload = jwt.decode(token, SECRET_KEY, algorithms=[ALGORITHM])
+
         account: str = payload.get("account")
         id_permission: int = payload.get("id_permission")
         id_info: int = payload.get("id_info")

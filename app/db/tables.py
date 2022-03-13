@@ -18,6 +18,7 @@ class Info(Base):
     full_name = Column(String(250))
     dob = Column(DateTime)
     email = Column(String(250))
+    address = Column(String(250))
 
     user = relationship("User",
                         back_populates="info",

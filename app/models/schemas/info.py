@@ -4,7 +4,8 @@ from app.models.domain import (
 
 class InfoCreate(
     _info_domain.InfoFullName, _info_domain.InfoEmail,
-    _info_domain.InfoPhone, _info_domain.InfoDOB
+    _info_domain.InfoPhone, _info_domain.InfoDOB,
+    _info_domain.InfoAddress
 ):
     pass
 
@@ -12,7 +13,7 @@ class InfoCreate(
 class InfoDetail(
     _base.InfoId, _info_domain.InfoFullName,
     _info_domain.InfoEmail, _info_domain.InfoPhone,
-    _info_domain.InfoDOB
+    _info_domain.InfoDOB, _info_domain.InfoAddress
 ):
     pass
 
@@ -23,6 +24,6 @@ class InfoDetail(
 class InfoUpdate(
     _info_domain.InfoFullName,
     _info_domain.InfoEmail, _info_domain.InfoPhone,
-    _info_domain.InfoDOB
+    _info_domain.InfoDOB, _info_domain.InfoAddress
 ):
     pass

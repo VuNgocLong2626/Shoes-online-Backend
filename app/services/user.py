@@ -4,7 +4,8 @@ from app.models.schemas import (
     user as _user_schemas,
     info as _info_schemas
 )
-from fastapi import HTTPException, status
+from fastapi.security import OAuth2PasswordRequestForm
+from fastapi import HTTPException, status, Depends
 from app.services.athu import (
                                 get_password_hash, 
                                 create_access_token,
@@ -84,8 +85,31 @@ class UserServices():
         if respon is None:
             raise get_user_exception()
         raise get_user_done()
-        
+    
+    def login_form(form_data: OAuth2PasswordRequestForm = Depends()):
+        user_in = _user_schemas.UserLogin(**{
+            "account": form_data.username,
+            "password": form_data.password
+        })
 
+        respon_user = get_user(user_in)
+        if not respon_user:
+            raise get_user_exception()
+
+        athu_password = verify_password(user_in.password, respon_user.password)
+        if not athu_password:
+            raise get_user_exception()
+
+        # Check permission
+
+        user_token = _usertoken_schemas(**{
+                "id_user": respon_user.id_user,
+                "id_info": respon_user.id_info,
+                "id_permission": respon_user.id_permission,
+                "account": respon_user.account
+            })
+        token = create_access_token(user_token)
+        return token
 
 def get_user_exception():
     credentials_exception = HTTPException(

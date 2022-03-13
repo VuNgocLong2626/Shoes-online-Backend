@@ -24,3 +24,7 @@ class InfoDOB(BaseModel):
 
 class InfoEmail(BaseModel):
     email: str = Field(None, alias='email')
+
+
+class InfoAddress(BaseModel):
+    address: str = Field(None, alias='address')
