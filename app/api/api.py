@@ -1,5 +1,5 @@
 from fastapi import APIRouter
-from app.api.routers import permission, name_services, user, admin, gender, promotion, color, size
+from app.api.routers import permission, name_services, user, admin, gender, promotion, color, size, category, product
 
 
 router = APIRouter()
@@ -13,3 +13,5 @@ router.include_router(gender.router)
 router.include_router(promotion.router)
 router.include_router(color.router)
 router.include_router(size.router)
+router.include_router(category.router)
+router.include_router(product.router)

@@ -1,4 +1,5 @@
 from pydantic import BaseModel, Field
+from typing import Optional
 
 
 class UserId(BaseModel):
@@ -42,7 +43,7 @@ class CategoryId(BaseModel):
 
 
 class PromotionId(BaseModel):
-    id_promotion: int = Field(alias='id_promotion')
+    id_promotion: Optional[int] = Field(None, alias='id_promotion')
 
 
 class GenderId(BaseModel):
@@ -50,7 +51,7 @@ class GenderId(BaseModel):
 
 
 class SizeId(BaseModel):
-    id_size: int = Field(alias='id_size')
+    id_size: int = Field(None, alias='id_size')
 
 
 class ImageId(BaseModel):
@@ -58,11 +59,11 @@ class ImageId(BaseModel):
 
 
 class ColorId(BaseModel):
-    id_color: int = Field(alias='id_color')
+    id_color: int = Field(None, alias='id_color')
 
 
 class ProductDetailsId(BaseModel):
-    id_product: int = Field(alias='id_product')
+    id_product_detail: int = Field(alias='id_product_detail')
 
 
 class RateId(BaseModel):
@@ -75,3 +76,7 @@ class CommentsId(BaseModel):
 
 class RateProductId(BaseModel):
     id_rate_product: int = Field(alias='id_rate_product')
+
+
+class SizeQuantityId(BaseModel):
+    id_size_quantity: int = Field(alias='id_size_quantity')

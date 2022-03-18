@@ -205,6 +205,7 @@ class Product(Base):
     id_gender = Column(Integer, ForeignKey(
         'gender.id_gender', ondelete="CASCADE"))
 
+    # msp = Column(String(250), unique=True)
     name = Column(String(250))
     detail = Column(String(250))
     money = Column(Integer)
@@ -246,7 +247,7 @@ class Size(Base):
     id_size = Column(Integer, primary_key=True, index=True)
     size_number = Column(Float)
 
-    product_detail = relationship("ProductDetail",
+    size_quantity = relationship("SizeQuantity",
                                   back_populates="size",
                                   cascade="all, delete",
                                   passive_deletes=True)
@@ -285,10 +286,11 @@ class ProductDetail(Base):
         'product.id_product', ondelete="CASCADE"))
     id_color = Column(Integer, ForeignKey(
         'color.id_color', ondelete="CASCADE"))
-    id_size = Column(Integer, ForeignKey('size.id_size', ondelete="CASCADE"))
+        
+    # id_size = Column(Integer, ForeignKey('size.id_size', ondelete="CASCADE"))
 
-    quantity_sold = Column(Integer)
-    quantity = Column(Integer)
+    # quantity_sold = Column(Integer)
+    # quantity = Column(Integer)
 
     product = relationship("Product", back_populates="product_detail")
     color = relationship("Color", back_populates="product_detail")
@@ -296,7 +298,11 @@ class ProductDetail(Base):
                         back_populates="product_detail",
                         cascade="all, delete",
                         passive_deletes=True)
-    size = relationship("Size", back_populates="product_detail")
+    size_quantity = relationship("SizeQuantity",
+                        back_populates="product_detail",
+                        cascade="all, delete",
+                        passive_deletes=True)
+    # size = relationship("Size", back_populates="product_detail")
 
 
 class Rate(Base):
@@ -324,3 +330,18 @@ class RateProduct(Base):
     product = relationship("Product", back_populates="rate_product")
     rate = relationship("Rate", back_populates="rate_product")
     comments = relationship("Comments", back_populates="rate_product")
+
+
+class SizeQuantity(Base):
+    __tablename__ = "size_quantity"
+
+    id_size_quantity = Column(Integer, primary_key=True, index=True)
+    id_product_detail =  Column(Integer, ForeignKey(
+        'product_detail.id_product_detail', ondelete="CASCADE"))
+    id_size = Column(Integer, ForeignKey('size.id_size', ondelete="CASCADE"))
+
+    quantity_sold = Column(Integer)
+    quantity = Column(Integer)
+
+    product_detail = relationship("ProductDetail", back_populates="size_quantity")
+    size = relationship("Size", back_populates="size_quantity")

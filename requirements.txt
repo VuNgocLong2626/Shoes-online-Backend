@@ -10,3 +10,4 @@ cryptography
 mysqlclient
 passlib[bcrypt]
 python-jose[cryptography]
+ksuid
