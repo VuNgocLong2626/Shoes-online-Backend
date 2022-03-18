@@ -8,6 +8,7 @@ db = SessionLocal()
 
 
 def get_user(user_in: UserLogin):
+    db.close()
     respon = db.query(User).filter(User.account == user_in.account).first()
     return respon
     # if respon:

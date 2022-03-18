@@ -41,7 +41,7 @@ class AdminServices():
     def create_admin(admin_in: _admin_schemas.UserToken, admin_create: _admin_schemas.UserCreate):
         respon_permission = get_by_id_permission(admin_in.id_permission)
         if respon_permission.name != "Admin":
-            raise get_user_exception()
+            raise get_user_create_athu()
         
         new_info = _info_schemas.InfoCreate(**admin_create.info.dict())
         info_out = create_info(new_info)
@@ -84,5 +84,12 @@ def get_user_done():
     credentials_exception = HTTPException(
         detail= "Done",
         status_code=status.HTTP_200_OK
+    )
+    return credentials_exception
+
+def get_user_create_athu():
+    credentials_exception = HTTPException(
+        detail= "incompetent",
+        status_code=status.HTTP_401_UNAUTHORIZED
     )
     return credentials_exception
