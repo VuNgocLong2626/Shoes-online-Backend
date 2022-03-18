@@ -15,6 +15,8 @@ class PromotionServices():
     def create_promotion(promotion_in: _promotion_schemas.PromotionCreate):
         try:
             respon = create_promotion(promotion_in)
+            if respon is None:
+                raise get_promotion_create_exception()
             return respon
         except:
             raise get_promotion_exception()
@@ -53,5 +55,12 @@ def get_promotion_done():
     credentials_exception = HTTPException(
         detail= "Done",
         status_code=status.HTTP_200_OK
+    )
+    return credentials_exception
+
+def get_promotion_create_exception():
+    credentials_exception = HTTPException(
+        detail= "Not Create",
+        status_code=status.HTTP_400_BAD_REQUEST,
     )
     return credentials_exception

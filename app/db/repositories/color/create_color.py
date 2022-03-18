@@ -15,4 +15,4 @@ def create_color(color_in: ColorCreate):
         db.commit()
         return color_new
     except:    
-        return false
+        return None

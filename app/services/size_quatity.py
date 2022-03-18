@@ -13,7 +13,7 @@ class SizeQuantityService():
     def create_size_quatity(size_quatity_in: _size_quatity_schemas.SizeQuantityCreate):
         respon = create_size_quatity(size_quatity_in)
         if respon is None:
-            raise get_size_quatity_exception()
+            raise get_size_quatity_create_exception()
         return respon
 
     def get_all_size_quatity():
@@ -39,5 +39,12 @@ def get_size_quatity_done():
     credentials_exception = HTTPException(
         detail= "Done",
         status_code=status.HTTP_200_OK
+    )
+    return credentials_exception
+
+def get_size_quatity_create_exception():
+    credentials_exception = HTTPException(
+        detail= "Not Create",
+        status_code=status.HTTP_400_BAD_REQUEST,
     )
     return credentials_exception

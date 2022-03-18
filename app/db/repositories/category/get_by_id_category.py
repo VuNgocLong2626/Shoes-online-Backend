@@ -8,6 +8,6 @@ db = SessionLocal()
 
 
 def get_by_id_category(id_category: int):
-    db.commit()
+    db.close()
     respon = db.query(Category).filter(Category.id_category == id_category).first()
     return respon

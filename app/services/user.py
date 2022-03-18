@@ -36,7 +36,9 @@ class UserServices():
                 "password": hash_password
             })
             user_out = create_user(new_user)
-
+            if user_out is None:
+                raise get_user_create_exception()
+                
             user_token = _usertoken_schemas(**{
                 "id_user": user_out.id_user,
                 "id_info": user_out.id_info,
@@ -122,5 +124,12 @@ def get_user_done():
     credentials_exception = HTTPException(
         detail= "Done",
         status_code=status.HTTP_200_OK
+    )
+    return credentials_exception
+
+def get_user_create_exception():
+    credentials_exception = HTTPException(
+        detail= "Not Create",
+        status_code=status.HTTP_404_NOT_FOUND,
     )
     return credentials_exception

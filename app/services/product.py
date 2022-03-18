@@ -28,7 +28,7 @@ class ProductServices():
     def create_product_basic(product_new: _product_schemas.ProductCreateForm):
         respon = create_product(product_new)
         if respon is None:
-            raise get_product_exception()
+            raise get_product_create_exception()
         
         return respon
         
@@ -60,7 +60,7 @@ class ProductServices():
 
         respon_product_detail = create_product_detail(product_detail)
         if respon_product_detail is None:
-            raise get_product_exception()
+            raise get_product_create_exception()
 
         image_responses = []
         for index, file in enumerate(files, start=1):
@@ -102,5 +102,12 @@ def get_product_done():
     credentials_exception = HTTPException(
         detail= "Done",
         status_code=status.HTTP_200_OK
+    )
+    return credentials_exception
+
+def get_product_create_exception():
+    credentials_exception = HTTPException(
+        detail= "Not Create",
+        status_code=status.HTTP_400_BAD_REQUEST,
     )
     return credentials_exception

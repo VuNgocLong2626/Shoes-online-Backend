@@ -15,4 +15,4 @@ def create_promotion(promotion_in: PromotionCreate):
         db.commit()
         return promotion_new
     except:    
-        return false
+        return None

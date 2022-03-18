@@ -16,4 +16,4 @@ def create_user(user_in: UserInDB):
         return new_user
     except:
         db.rollback()    
-        return false
+        return None

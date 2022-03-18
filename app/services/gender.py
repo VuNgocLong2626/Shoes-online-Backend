@@ -12,6 +12,8 @@ class GenderServices():
 
     def create_gender(gender_in: _gender_schemas.GenderCreate):
         respon = create_gender(gender_in)
+        if respon is None:
+            raise get_gender_create_exception()
         return respon
 
     def get_all_gender():
@@ -43,5 +45,12 @@ def get_gender_done():
     credentials_exception = HTTPException(
         detail= "Done",
         status_code=status.HTTP_200_OK
+    )
+    return credentials_exception
+
+def get_gender_create_exception():
+    credentials_exception = HTTPException(
+        detail= "Not Create",
+        status_code=status.HTTP_400_BAD_REQUEST,
     )
     return credentials_exception

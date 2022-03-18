@@ -11,8 +11,8 @@ class NameServicesServices():
 
     def create_nameser(nameser_in: _nameser_schemas.NameServicesCreate):
         respon = create_nameser(nameser_in)
-        if respon == false:
-            raise get_namser_exception()
+        if respon is None:
+            raise get_namser_create_exception()
         return respon
 
     def get_all_nameser():
@@ -32,5 +32,12 @@ def get_namser_exception():
     credentials_exception = HTTPException(
         detail= "Not Found",
         status_code=status.HTTP_404_NOT_FOUND,
+    )
+    return credentials_exception
+
+def get_namser_create_exception():
+    credentials_exception = HTTPException(
+        detail= "Not Create",
+        status_code=status.HTTP_400_BAD_REQUEST,
     )
     return credentials_exception

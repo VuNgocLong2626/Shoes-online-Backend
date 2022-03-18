@@ -13,6 +13,8 @@ class CategoryServices():
 
     def create_category(category_in: _category_schemas.CategoryCreate):
         respon = create_category(category_in)
+        if respon is None:
+            raise get_category_create_exception()
         return respon
 
     def get_all_category():
@@ -51,4 +53,12 @@ def get_category_done():
         status_code=status.HTTP_200_OK
     )
     return credentials_exception
+
+def get_category_create_exception():
+    credentials_exception = HTTPException(
+        detail= "Not Create",
+        status_code=status.HTTP_400_BAD_REQUEST,
+    )
+    return credentials_exception
+
     

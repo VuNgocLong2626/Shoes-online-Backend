@@ -12,8 +12,8 @@ class PermissionService():
 
     def create_permission(permission_in: _permission_schemas.PermissionCreate):
         response = create_permission(permission_in)
-        if response == false:
-            raise get_user_exception()
+        if response is None:
+            raise get_user_create_exception()
         return response
 
     def get_all_permission():
@@ -36,5 +36,12 @@ def get_user_exception():
     credentials_exception = HTTPException(
         detail= "Not Found",
         status_code=status.HTTP_404_NOT_FOUND,
+    )
+    return credentials_exception
+
+def get_user_create_exception():
+    credentials_exception = HTTPException(
+        detail= "Not Create",
+        status_code=status.HTTP_400_BAD_REQUEST,
     )
     return credentials_exception

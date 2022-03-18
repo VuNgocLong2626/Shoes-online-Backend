@@ -14,4 +14,4 @@ def create_permission(permission_in: PermissionCreate):
         db.commit()
         return new_permisson
     except:
-        return false
+        return None

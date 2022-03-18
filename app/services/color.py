@@ -13,9 +13,11 @@ class ColorServices():
     def create_color(color_in: _Color_schemas.ColorCreate):
         try:
             respon = create_color(color_in)
+            if respon is None:
+                raise get_color_create_exception()
             return respon
         except:
-            raise get_color_exception()
+            raise get_color_create_exception()
 
     def get_all_color():
         respon = get_all_color()
@@ -47,5 +49,12 @@ def get_color_done():
     credentials_exception = HTTPException(
         detail= "Done",
         status_code=status.HTTP_200_OK
+    )
+    return credentials_exception
+
+def get_color_create_exception():
+    credentials_exception = HTTPException(
+        detail= "Not Create",
+        status_code=status.HTTP_400_BAD_REQUEST,
     )
     return credentials_exception

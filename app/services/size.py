@@ -13,6 +13,8 @@ class SizeServices():
     def create_size(size_in: _Size_schemas.SizeCreate):
         # try:
         respon = create_size(size_in)
+        if respon is None:
+            raise get_size_create_exception()
         return respon
         # except:
         #     raise get_size_exception()
@@ -47,5 +49,12 @@ def get_size_done():
     credentials_exception = HTTPException(
         detail= "Done",
         status_code=status.HTTP_200_OK
+    )
+    return credentials_exception
+
+def get_size_create_exception():
+    credentials_exception = HTTPException(
+        detail= "Not Create",
+        status_code=status.HTTP_400_BAD_REQUEST,
     )
     return credentials_exception

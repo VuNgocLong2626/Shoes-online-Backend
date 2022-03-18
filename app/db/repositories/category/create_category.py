@@ -19,4 +19,4 @@ def create_category(category_in: CategoryCreate):
         db.commit()
         return category_new
     except:    
-        return false
+        return None

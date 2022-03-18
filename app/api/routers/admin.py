@@ -19,17 +19,17 @@ async def get_admin(admin_in: _admin_schemas.UserLogin):
     respon = AdminServices.get_admin(admin_in)
     return respon
 
-@router.post("/create_account")
+@router.post("/create-account")
 async def create_admin(admin_create: _admin_schemas.UserCreate, admin_in: dict = Depends(get_current_user)):
     respon = AdminServices.create_admin(admin_in, admin_create)
     return respon
 
-@router.put("/update_account_info")
+@router.put("/update-account-info")
 async def create_admin(admin_info: _info_schemas.InfoUpdate, admin_in: dict = Depends(get_current_user)):
     respon = AdminServices.update_admin_info(admin_in, admin_info)
     return respon
 
-@router.get("/get_account_info")
+@router.get("/get-account-info")
 async def create_admin(admin_in: dict = Depends(get_current_user)):
     respon = AdminServices.get_info_admin_by_id(admin_in)
     return respon
