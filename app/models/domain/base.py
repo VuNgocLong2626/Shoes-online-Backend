@@ -3,7 +3,7 @@ from typing import Optional
 
 
 class UserId(BaseModel):
-    id_user: int = Field(alias='id_user')
+    id_user: int = Field(None, alias='id_user')
 
 
 class NameServicesId(BaseModel):
@@ -15,7 +15,7 @@ class ServicesId(BaseModel):
 
 
 class BillId(BaseModel):
-    id_bill: int = Field(alias='id_bill')
+    id_bill: int = Field(None, alias='id_bill')
 
 
 class InfoId(BaseModel):
@@ -39,7 +39,7 @@ class ProductId(BaseModel):
 
 
 class CategoryId(BaseModel):
-    id_category: int = Field(alias='id_category')
+    id_category: int = Field(None, alias='id_category')
 
 
 class PromotionId(BaseModel):
@@ -80,3 +80,9 @@ class RateProductId(BaseModel):
 
 class SizeQuantityId(BaseModel):
     id_size_quantity: int = Field(alias='id_size_quantity')
+
+class BillDetailId(BaseModel):
+    id_bill_detail: int = Field(alias='id_bill_detail')
+
+class VerifierId(BaseModel):
+    id_verifier: int = Field(None, alias='id_verifier')

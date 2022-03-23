@@ -3,7 +3,7 @@ from app.models.schemas import (
     product_detail as _product_detail_schemas,
     product as _product_schemas)
 from fastapi import HTTPException, status, UploadFile
-from typing import List
+from typing import List, Optional
 from app.utils import (
     file_utils as _file_utils,
     image_utils as _image_utils
@@ -16,8 +16,10 @@ from app.db.repositories.product_detail.create_produc_detail import create_produ
 from app.db.repositories.product_detail.get_all_product_detail import get_all_product_detail
 from app.db.repositories.image.create_image import create_image
 from app.db.repositories.image.get_image_by_id_product import get_image_by_id_product
-
-
+from app.db.repositories.color.get_by_id_color import get_by_id_color
+from app.db.repositories.product_detail.get_by_id_product_detail import get_by_id_product_detail
+from app.db.repositories.product.get_by_id_category import get_by_id_category
+from app.db.repositories.size_quantity.get_quantity_by_id_product_detail import get_quantity_by_id_product_detail
 
 
 class ProductServices():
@@ -88,8 +90,53 @@ class ProductServices():
 
         return respon
 
+    def get_all_product(id_gender: Optional[int] = None):
+        product_all = get_all_product_basic(id_gender)
+        respon = get_all_main(product_all)
+        return respon
+
+    def get_filter_product(fillter_in: _product_schemas.ProductFillter):
+        if not fillter_in.id_category is None:
+            # Not Done
+            products = get_by_id_category(fillter_in.id_category)
+            return products
+        return 0
 
 
+def get_list_by_id_product_detail(id_product: int):
+    detail_all = get_by_id_product_detail(id_product)
+    respon = []
+    for detail in detail_all:
+        detail = {**detail.__dict__}
+        list_image = get_list_path_by_id_product_detail(detail.get("id_product_detail"))
+        detail.update({"list_image": list_image})
+        list_size = get_quantity_by_id_product_detail(detail.get("id_product_detail"))
+        detail.update({"list_size": list_size})
+        hex = get_hex_color_by_id_color(detail.get("id_color"))
+        detail.update({"hex": hex})
+        respon.append(detail)
+    return respon
+
+def get_list_path_by_id_product_detail(id_product_detail: int):
+    list_image = get_image_by_id_product(id_product_detail)
+    list_path = []
+    for image in list_image:
+        list_path.append(image.path)
+    return list_path
+
+def get_all_main(product_all):
+    respon = []
+    for product in product_all:
+        product = {**product.__dict__}
+        product_detail = get_list_by_id_product_detail(product.get("id_product"))
+        product.update({"list_color": product_detail})
+        respon.append(product)
+    return respon
+# def get    
+
+def get_hex_color_by_id_color(id_color: int):
+    color = get_by_id_color(id_color).hex
+    return color
 
 def get_product_exception():
     credentials_exception = HTTPException(

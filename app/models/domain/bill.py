@@ -1,19 +1,18 @@
-from matplotlib.pyplot import cla
 from pydantic import BaseModel, Field
-import datetime as date
+from datetime import date
 
 
 class BillStatus(BaseModel):
-    status: str = Field(alias='status')
+    status: str = Field(None, alias='status')
 
 
 class BillCreate(BaseModel):
-    date_create: date = Field(alias='date_create')
+    date_create: date = Field(None, alias='date_create')
 
 
 class BillTotal(BaseModel):
-    total: str = Field(alias='total')
+    total: str = Field(None, alias='total')
 
 
 class BillMethod(BaseModel):
-    method: str = Field(alias='method')
+    method: str = Field(None, alias='method')

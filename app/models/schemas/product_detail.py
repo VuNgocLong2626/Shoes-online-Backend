@@ -9,6 +9,7 @@ from typing import List
 class ProductDetailIn(
     _base.ColorId
 ):
+    list_image: List[_product_detail_domain.ImagePath]
     size_quantity: List[_size_quatity_schemas.SizeQuantityIn]
 
     class Config:

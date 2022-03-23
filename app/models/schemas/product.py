@@ -47,3 +47,10 @@ class ProductUpdateForm(
     _product_domain.ProductName
 ):
     pass
+
+
+class ProductFillter(
+    _base.ColorId,
+    _base.CategoryId
+):
+    pass

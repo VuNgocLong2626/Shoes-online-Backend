@@ -7,7 +7,7 @@ from app.db.tables import Product
 db = SessionLocal()
 
 
-def get_by_id_product(id_product: int):
+def get_by_id_category(id_category: int):
     db.close()
-    respon = db.query(Product).filter(Product.id_product == id_product).first()
+    respon = db.query(Product).filter(Product.id_category == id_category).all()
     return respon

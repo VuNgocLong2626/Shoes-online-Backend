@@ -4,6 +4,7 @@ from sqlalchemy import (Boolean,
                         String,
                         ForeignKey,
                         DateTime,
+                        UnicodeText,
                         null)
 from app.db.database import Base
 from sqlalchemy.orm import relationship
@@ -207,7 +208,7 @@ class Product(Base):
 
     # msp = Column(String(250), unique=True)
     name = Column(String(250))
-    detail = Column(String(250))
+    detail = Column(UnicodeText)
     money = Column(Integer)
 
     category = relationship("Category", back_populates="product")
@@ -236,6 +237,8 @@ class BillDetails(Base):
 
     quantily = Column(Integer)
     current_price = Column(Integer)
+    id_product_detail = Column(Integer)
+    id_size_quantity = Column(Integer)
 
     bill = relationship("Bill", back_populates="bill_details")
     product = relationship("Product", back_populates="bill_details")

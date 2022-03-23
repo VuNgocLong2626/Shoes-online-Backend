@@ -42,3 +42,10 @@ class SizeQuantityUpdate(
 ):
     pass 
 
+
+class SizeQuantityUpdateQuantity(
+    _base.SizeQuantityId,
+    _size_quatity_domain.SizeQuantitySold,
+    _size_quatity_domain.ProductQuantityQuantity
+):
+    pass 

@@ -1,6 +1,6 @@
 from fastapi import APIRouter, UploadFile, Form
 from sqlalchemy import null
-from typing import List
+from typing import List, Optional
 from app.services.product import ProductServices
 from app.services.size_quatity import SizeQuantityService
 from app.models.schemas import (
@@ -63,4 +63,14 @@ async def get_size_quantity():
 @router.put("/update-size-quantity")
 async def update_size_quantity(quantity_in: _size_quatity_schemas.SizeQuantityDetail):
     respon = SizeQuantityService.update_size_quantity(quantity_in)
+    return respon
+
+@router.get("/all-product")
+async def get_all_product(id_gender: Optional[int] = None):
+    respon = ProductServices.get_all_product(id_gender)
+    return respon
+
+@router.post("/filter-product")
+async def get_filter_product(filter_in: _product_schemas.ProductFillter):
+    respon = ProductServices.get_filter_product(filter_in)
     return respon
