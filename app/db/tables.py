@@ -100,6 +100,7 @@ class Bill(Base):
     date_create = Column(DateTime)
     total = Column(String(250))
     method = Column(String(250))
+    address = Column(String(250))
 
     user = relationship("User", back_populates="bill_create",
                         foreign_keys=[id_user])

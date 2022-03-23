@@ -10,7 +10,8 @@ class BillCreate(
     _bill_domain.BillStatus,
     _bill_domain.BillCreate,
     _bill_domain.BillTotal,
-    _bill_domain.BillMethod
+    _bill_domain.BillMethod,
+    _bill_domain.BillAddress
 ):
     list_bill_detail: List[BillDetailInDB]
 
@@ -22,7 +23,8 @@ class BillDetail(
     _bill_domain.BillStatus,
     _bill_domain.BillCreate,
     _bill_domain.BillTotal,
-    _bill_domain.BillMethod
+    _bill_domain.BillMethod,
+    _bill_domain.BillAddress
 ):
     pass
 
@@ -43,7 +45,8 @@ class BillInDB(
     _bill_domain.BillStatus,
     _bill_domain.BillCreate,
     _bill_domain.BillTotal,
-    _bill_domain.BillMethod
+    _bill_domain.BillMethod,
+    _bill_domain.BillAddress
 ):
     pass
 

@@ -16,3 +16,7 @@ class BillTotal(BaseModel):
 
 class BillMethod(BaseModel):
     method: str = Field(None, alias='method')
+
+
+class BillAddress(BaseModel):
+    address: str = Field(None, alias='address')
