@@ -70,8 +70,8 @@ class RateId(BaseModel):
     id_rate: int = Field(alias='id_rate')
 
 
-class CommentsId(BaseModel):
-    id_comments: int = Field(alias='id_comments')
+# class CommentsId(BaseModel):
+#     id_comments: int = Field(alias='id_comments')
 
 
 class RateProductId(BaseModel):

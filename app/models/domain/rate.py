@@ -2,4 +2,4 @@ from pydantic import BaseModel, Field
 
 
 class RateStart(BaseModel):
-    start: int = Field(alias='number_star')
+    number_star: int = Field(alias='number_star')

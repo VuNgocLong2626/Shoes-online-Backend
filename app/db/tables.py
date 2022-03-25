@@ -154,7 +154,11 @@ class Comments(Base):
     Date = Column(DateTime)
 
     user = relationship("User", back_populates="comments")
-    rate_product = relationship("RateProduct", back_populates="comments")
+    rate_product = relationship("RateProduct",
+                            back_populates="comments",
+                            cascade="all, delete",
+                            passive_deletes=True)
+
 
 
 class Gender(Base):

@@ -1,10 +1,11 @@
 from pydantic import BaseModel, Field
-import datetime as date
+from datetime import date
 
 
 class CommentsContent(BaseModel):
-    content: str = Field(alias='Content')
+    Content: str = Field(alias='Content')
+
 
 
 class CommentsDate(BaseModel):
-    date: date = Field(alias='Date')
+    Date: date = Field(alias='Date')
