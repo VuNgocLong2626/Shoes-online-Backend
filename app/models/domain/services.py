@@ -1,5 +1,5 @@
 from pydantic import BaseModel, Field
-import datetime as date
+from datetime import date
 
 
 class ServicesBook(BaseModel):
@@ -7,7 +7,7 @@ class ServicesBook(BaseModel):
 
 
 class ServicesCreate(BaseModel):
-    data_create: date = Field(None, alias='data_create')
+    date_create: date = Field(alias='date_create')
 
 
 class ServicesStatus(BaseModel):
