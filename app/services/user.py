@@ -59,7 +59,8 @@ class UserServices():
         if not athu_password:
             raise get_user_exception()
 
-        # Check permission
+        if not respon_user.id_permission == 3:
+            raise get_user_exception()
 
         user_token = _usertoken_schemas(**{
                 "id_user": respon_user.id_user,
@@ -102,7 +103,8 @@ class UserServices():
         if not athu_password:
             raise get_user_exception()
 
-        # Check permission
+        if not respon_user.id_permission == 3:
+            raise get_user_exception()
 
         user_token = _usertoken_schemas(**{
                 "id_user": respon_user.id_user,

@@ -3,11 +3,12 @@ from app.models.schemas import (
     user as _admin_schemas,
     info as _info_schemas
 )
+from fastapi.security import OAuth2PasswordRequestForm
 from app.services.athu import (
                                 get_password_hash, 
                                 create_access_token,
                                 verify_password)
-from fastapi import HTTPException, status
+from fastapi import HTTPException, status, Depends
 from app.db.repositories.admin.get_admin import get_admin
 from app.db.repositories.user.create_user import create_user
 
@@ -15,6 +16,7 @@ from app.db.repositories.permission.get_by_id_permission import get_by_id_permis
 from app.db.repositories.info.create_info import create_info
 from app.db.repositories.info.update_info import update_info
 from app.db.repositories.info.get_by_id_info import get_by_id_info
+from app.db.repositories.user.get_user import get_user
 
 
 class AdminServices():
@@ -70,6 +72,29 @@ class AdminServices():
     def get_info_admin_by_id(admin_in: _admin_schemas.UserToken):
         response = get_by_id_info(admin_in.id_info)
         return response
+
+    def login_form_admin(form_data: OAuth2PasswordRequestForm = Depends()):
+        user_in = _admin_schemas.UserLogin(**{
+            "account": form_data.username,
+            "password": form_data.password
+        })
+
+        respon_user = get_user(user_in)
+        if not respon_user:
+            raise get_user_exception()
+
+        athu_password = verify_password(user_in.password, respon_user.password)
+        if not athu_password:
+            raise get_user_exception()
+
+        user_token = _admin_schemas.UserToken(**{
+                "id_user": respon_user.id_user,
+                "id_info": respon_user.id_info,
+                "id_permission": respon_user.id_permission,
+                "account": respon_user.account
+            })
+        token = create_access_token(user_token)
+        return token
 
 
 

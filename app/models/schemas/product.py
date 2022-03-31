@@ -3,7 +3,7 @@ from app.models.domain import (
                                 product as _product_domain)
 from app.models.schemas import product_detail as _product_detail_schemas
 from typing import List, Dict
-
+from pydantic import BaseModel, Field
 
 class ProductCreate(
     _product_domain.ProductDetail,
@@ -49,8 +49,9 @@ class ProductUpdateForm(
     pass
 
 
-class ProductFillter(
-    _base.ColorId,
-    _base.CategoryId
-):
-    pass
+class ProductFillter(BaseModel):
+    list_id_category: List[int] = Field(None)
+    list_id_color: List[int] =  Field(None)
+
+    class Config:
+                orm_mode = True

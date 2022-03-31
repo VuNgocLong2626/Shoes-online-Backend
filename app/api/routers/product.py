@@ -74,3 +74,8 @@ async def get_all_product(id_gender: Optional[int] = None):
 async def get_filter_product(filter_in: _product_schemas.ProductFillter):
     respon = ProductServices.get_filter_product(filter_in)
     return respon
+
+@router.get("/test/")
+async def get(id: int):
+    respon = ProductServices.test(id)
+    return respon

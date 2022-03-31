@@ -20,6 +20,10 @@ from app.db.repositories.color.get_by_id_color import get_by_id_color
 from app.db.repositories.product_detail.get_by_id_product_detail import get_by_id_product_detail
 from app.db.repositories.product.get_by_id_category import get_by_id_category
 from app.db.repositories.size_quantity.get_quantity_by_id_product_detail import get_quantity_by_id_product_detail
+from app.db.repositories.category.get_promotion_by_id_category import get_promotion_by_id_category
+from app.db.repositories.product.get_by_in_id_category import get_by_in_id_category
+from app.db.repositories.product.get_by_in_id_color import get_by_in_id_color
+from app.db.repositories.product.get_by_in_id_category_and_color import get_by_in_id_category_and_color
 
 
 class ProductServices():
@@ -96,11 +100,22 @@ class ProductServices():
         return respon
 
     def get_filter_product(fillter_in: _product_schemas.ProductFillter):
-        if not fillter_in.id_category is None:
+        if (not fillter_in.list_id_category is None):
             # Not Done
-            products = get_by_id_category(fillter_in.id_category)
-            return products
-        return 0
+            if (fillter_in.list_id_color is None):
+                product_all = get_by_in_id_category(fillter_in.list_id_category)
+                respon_not_color = get_all_main(product_all)
+                return respon_not_color
+            product_all = get_by_in_id_category_and_color(fillter_in.list_id_category, fillter_in.list_id_color)
+            respon = get_all_main(product_all)
+            return respon
+        product_all = get_by_in_id_color(fillter_in.list_id_color)
+        respon_not_category = get_all_main(product_all)
+        return respon_not_category
+
+    def test(id: int):
+        respon = get_discount(id)
+        return respon
 
 
 def get_list_by_id_product_detail(id_product: int):
@@ -124,10 +139,23 @@ def get_list_path_by_id_product_detail(id_product_detail: int):
         list_path.append(image.path)
     return list_path
 
-def get_all_main(product_all):
+def get_discount(id_category: int):
+    respon = get_promotion_by_id_category(id_category)
+    return respon
+
+def get_all_main(product_all, list_id_color: Optional[List[int]] = None):
     respon = []
-    for product in product_all:
-        product = {**product.__dict__}
+    for products in product_all:
+        product = {**products.__dict__}
+        reduction = get_discount(products.id_category)
+        if reduction is None: 
+            reduction = 0 
+        else: 
+            reduction = reduction.reduction
+        
+        discount = products.money * (1 - reduction/100)
+        product.update({"discount": discount})
+        product.update({"reduction": reduction})
         product_detail = get_list_by_id_product_detail(product.get("id_product"))
         product.update({"list_color": product_detail})
         respon.append(product)

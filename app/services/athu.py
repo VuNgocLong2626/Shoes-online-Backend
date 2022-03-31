@@ -14,6 +14,7 @@ ALGORITHM = "HS256"
 bcrypt_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 
 oauth2_bearer = OAuth2PasswordBearer(tokenUrl="user/login-form")
+oauth2_bearer_admin = OAuth2PasswordBearer(tokenUrl="admin/login-form")
 
 
 def get_password_hash(password):
@@ -51,6 +52,31 @@ async def get_current_user(token: str = Depends(oauth2_bearer)):
         id_info: int = payload.get("id_info")
         id_user: int = payload.get("id_user")
         if account is None or id_permission is None or id_info is None or id_user is None:
+            raise get_user_exception()
+        if not id_permission == 3:
+            raise get_user_exception()
+        user_token = _usertoken_schemas(**{
+            "account": account, 
+            "id_user": id_user,
+            "id_permission": id_permission,
+            "id_info": id_info
+            })
+        return user_token
+    except JWTError:
+        raise get_user_exception()
+
+async def get_current_admin(token: str = Depends(oauth2_bearer_admin)):
+    try:
+        print(token)
+        payload = jwt.decode(token, SECRET_KEY, algorithms=[ALGORITHM])
+
+        account: str = payload.get("account")
+        id_permission: int = payload.get("id_permission")
+        id_info: int = payload.get("id_info")
+        id_user: int = payload.get("id_user")
+        if account is None or id_permission is None or id_info is None or id_user is None:
+            raise get_user_exception()
+        if id_permission == 3:
             raise get_user_exception()
         user_token = _usertoken_schemas(**{
             "account": account, 
