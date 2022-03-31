@@ -24,6 +24,7 @@ from app.db.repositories.category.get_promotion_by_id_category import get_promot
 from app.db.repositories.product.get_by_in_id_category import get_by_in_id_category
 from app.db.repositories.product.get_by_in_id_color import get_by_in_id_color
 from app.db.repositories.product.get_by_in_id_category_and_color import get_by_in_id_category_and_color
+from app.db.repositories.product.get_product_by_name import get_product_by_name
 
 
 class ProductServices():
@@ -112,6 +113,11 @@ class ProductServices():
         product_all = get_by_in_id_color(fillter_in.list_id_color)
         respon_not_category = get_all_main(product_all)
         return respon_not_category
+
+    def search_product_by_name(name: str):
+        product_all = get_product_by_name(name)
+        respon = get_all_main(product_all)
+        return respon
 
     def test(id: int):
         respon = get_discount(id)

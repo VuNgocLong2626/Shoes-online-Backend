@@ -75,6 +75,11 @@ async def get_filter_product(filter_in: _product_schemas.ProductFillter):
     respon = ProductServices.get_filter_product(filter_in)
     return respon
 
+@router.post("/search-product/{name}")
+async def get_search_product(name: str):
+    respon = ProductServices.search_product_by_name(name)
+    return respon
+
 @router.get("/test/")
 async def get(id: int):
     respon = ProductServices.test(id)
