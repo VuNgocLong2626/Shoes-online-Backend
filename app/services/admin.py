@@ -17,6 +17,7 @@ from app.db.repositories.info.create_info import create_info
 from app.db.repositories.info.update_info import update_info
 from app.db.repositories.info.get_by_id_info import get_by_id_info
 from app.db.repositories.user.get_user import get_user
+from app.db.repositories.admin.get_all_admin import get_all_admin
 
 
 class AdminServices():
@@ -96,6 +97,9 @@ class AdminServices():
         token = create_access_token(user_token)
         return token
 
+    def get_all_admin():
+        respon = get_all_admin()
+        return respon
 
 
 def get_user_exception():

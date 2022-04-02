@@ -2,16 +2,16 @@ from sqlalchemy import false
 from app.db.database import SessionLocal
 from app.models.schemas.product import ProductCreate
 from typing import List, Optional
-from app.db.tables import Product
+from app.db.tables import Product, Gender
 
 
 db = SessionLocal()
 
 
-def get_all_product_basic(id_gender: Optional[int] = None):
+def get_all_product_basic(_gender: Optional[str] = None):
     db.close()
-    if id_gender is None:
+    if _gender is None:
         respon = db.query(Product).all()
     else:
-        respon = db.query(Product).filter(Product.id_gender == id_gender).all()
+        respon = db.query(Product).join(Gender).filter(Gender.name == _gender).all()
     return respon

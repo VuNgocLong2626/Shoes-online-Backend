@@ -43,3 +43,8 @@ async def create_admin(admin_in: dict = Depends(get_current_admin)):
 async def get_admin(admin_in: dict = Depends(get_current_admin)):
 
     return admin_in
+
+@router.get("/get-all-admin")
+async def get_all_admin(admin_in: dict = Depends(get_current_admin)):
+    respon = AdminServices.get_all_admin()
+    return respon
