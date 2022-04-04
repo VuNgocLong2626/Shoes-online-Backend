@@ -4,7 +4,7 @@ from app.db.database import engine
 import app.db.tables as models
 from app.api import api as api_router
 from fastapi.middleware.cors import CORSMiddleware
-
+from dotenv import load_dotenv
 
 app = FastAPI()
 
@@ -27,3 +27,6 @@ models.Base.metadata.create_all(bind=engine)
 
 
 app.include_router(api_router.router)
+
+
+load_dotenv()

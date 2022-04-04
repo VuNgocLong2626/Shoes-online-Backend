@@ -1,5 +1,5 @@
 from fastapi import APIRouter
-from app.api.routers import permission, name_services, user, admin, gender, promotion, color, size, category, product, file, bill, rate, rate_comment, services
+from app.api.routers import permission, name_services, user, admin, gender, promotion, color, size, category, product, file, bill, rate, rate_comment, services, payment
 
 
 router = APIRouter()
@@ -20,3 +20,4 @@ router.include_router(bill.router)
 router.include_router(rate.router)
 router.include_router(rate_comment.router)
 router.include_router(services.router)
+router.include_router(payment.router)
