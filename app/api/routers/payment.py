@@ -60,7 +60,7 @@ async def create_order_paypal(
 async def payment_return(
     vnp_Amount: int,
     vnp_BankCode: str,
-    vnp_BankTranNo: int,
+    vnp_BankTranNo: str,
     vnp_CardType: str,
     vnp_OrderInfo: str,
     vnp_PayDate: str,
@@ -76,6 +76,7 @@ async def payment_return(
         "vnp_BankCode": vnp_BankCode,
         "vnp_BankTranNo": vnp_BankTranNo,
         "vnp_CardType": vnp_CardType,
+        "vnp_OrderInfo":vnp_OrderInfo,
         "vnp_PayDate": vnp_PayDate,
         "vnp_ResponseCode": vnp_ResponseCode,
         "vnp_TmnCode": vnp_TmnCode,

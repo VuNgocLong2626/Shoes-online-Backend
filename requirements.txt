@@ -11,5 +11,5 @@ mysqlclient
 passlib[bcrypt]
 python-jose[cryptography]
 ksuid
-# paypal-checkout-serversdk
-# python-dotenv
+paypal-checkout-serversdk
+python-dotenv
