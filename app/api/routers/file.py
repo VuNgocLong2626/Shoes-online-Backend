@@ -12,7 +12,9 @@ router = APIRouter(
 
 @router.get("/")
 async def get_file_image(image_path: str):
-    return ImageService.get_image(image_path)
+    respon = ImageService.get_image(image_path)
+    print(respon)
+    return respon
 
 @router.get("/kkkkkkkkk")
 async def get_file_image(image_path: str, request: Request):
