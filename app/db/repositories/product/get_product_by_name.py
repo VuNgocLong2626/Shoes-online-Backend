@@ -9,6 +9,6 @@ db = SessionLocal()
 
 
 def get_product_by_name(name: str):
-    db.close()
     respon = db.query(Product).filter(Product.name.like(f"%{name}%")).all()
+    db.close()
     return respon

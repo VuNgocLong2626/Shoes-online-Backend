@@ -12,7 +12,8 @@ def create_promotion(promotion_in: PromotionCreate):
     db.add(promotion_new)
     try:
         db.flush()
-        db.commit()
+        db.commit()        
         return promotion_new
     except:    
+        db.rollback()
         return None

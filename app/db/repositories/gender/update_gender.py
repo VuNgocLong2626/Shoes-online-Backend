@@ -14,6 +14,7 @@ def update_gender(gender_in: GenderUpdate):
         update({Gender.name: gender_in.name
                 })
         db.commit()
+        db.close()
         return gender_in
     except:
         return None

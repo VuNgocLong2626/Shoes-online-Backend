@@ -8,6 +8,6 @@ db = SessionLocal()
 
 
 def get_all_rate():
-    db.close()
     rate_all = db.query(Rate).all()
+    db.close()
     return rate_all

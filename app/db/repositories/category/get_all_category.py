@@ -8,6 +8,6 @@ db = SessionLocal()
 
 
 def get_all_category():
-    db.close()
     category_all = db.query(Category).all()
+    db.close()
     return category_all

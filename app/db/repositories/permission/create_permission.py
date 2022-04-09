@@ -14,4 +14,5 @@ def create_permission(permission_in: PermissionCreate):
         db.commit()
         return new_permisson
     except:
+        db.rollback()
         return None

@@ -15,4 +15,5 @@ def create_product(product_in: ProductCreateForm):
         db.commit()
         return product_new
     except:    
+        db.rollback()
         return None

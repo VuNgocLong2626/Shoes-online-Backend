@@ -8,6 +8,6 @@ db = SessionLocal()
 
 
 def get_all_promotion():
-    db.commit()
     respon = db.query(Promotion).all()
+    db.close()
     return respon

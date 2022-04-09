@@ -19,6 +19,7 @@ def update_product_basic(product_in: ProductUpdateForm):
             Product.id_category: product_in.id_category
             })
         db.commit()
+        db.close()
         return product_in
     except:
         return None

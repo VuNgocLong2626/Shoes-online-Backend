@@ -13,6 +13,7 @@ def update_password(user_in: UserToken, passw: str):
             filter(User.id_user == user_in.id_user).\
             update({User.password: passw})
         db.commit()
+        db.close()
         return True
     except:
         return None

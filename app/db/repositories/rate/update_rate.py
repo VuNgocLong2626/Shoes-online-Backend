@@ -13,7 +13,7 @@ def update_rate(rate_in: RateUpdate):
             .filter(Rate.id_rate == rate_in.id_rate)\
             .update({Rate.number_star: rate_in.number_star})
         db.commit()
-
+        db.close()
         return rate_in
     except:
         return None

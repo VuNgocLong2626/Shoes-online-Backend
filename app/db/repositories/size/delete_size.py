@@ -9,3 +9,4 @@ db = SessionLocal()
 def delete_size(id_size: int):
     db.query(Size).filter(Size.id_size == id_size).delete()
     db.commit()
+    db.close()

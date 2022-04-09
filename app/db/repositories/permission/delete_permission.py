@@ -9,4 +9,5 @@ db = SessionLocal()
 def delete_permission(id_permission):
     db.query(Permission).filter(Permission.id_permission == id_permission).delete()
     db.commit()
+    db.close()
     

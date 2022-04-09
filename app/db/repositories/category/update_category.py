@@ -15,6 +15,7 @@ def update_category(category_in: CategoryUpdate):
                 Category.id_promotion: category_in.id_promotion
             })
         db.commit()
+        db.close()
         return category_in
     except:
         return None

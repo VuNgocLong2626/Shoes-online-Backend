@@ -7,9 +7,10 @@ db = SessionLocal()
 
 
 def update_permission(permission_in: PermissionUpdate):
+    
     db.query(Permission).\
     filter(Permission.id_permission == permission_in.id_permission).\
     update({Permission.name: permission_in.name})
     db.commit()
-
+    db.close()
     return permission_in

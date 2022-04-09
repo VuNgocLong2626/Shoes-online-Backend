@@ -7,6 +7,6 @@ db = SessionLocal()
 
 
 def get_all_size():
-    db.commit()
     size_all = db.query(Size).all()
+    db.close()
     return size_all

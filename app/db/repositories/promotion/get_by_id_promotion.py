@@ -8,6 +8,6 @@ db = SessionLocal()
 
 
 def get_by_id_promotion(id_promotion: int):
-    db.commit()
     respon = db.query(Promotion).filter(Promotion.id_promotion == id_promotion).first()
+    db.close()
     return respon

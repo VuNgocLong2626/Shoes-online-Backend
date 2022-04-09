@@ -8,6 +8,6 @@ db = SessionLocal()
 
 
 def get_all_admin():
-    db.close()
     respon = db.query(User.account, Info.full_name).join(Info).filter(User.id_permission.in_((1,2))).all()
+    db.close()
     return respon

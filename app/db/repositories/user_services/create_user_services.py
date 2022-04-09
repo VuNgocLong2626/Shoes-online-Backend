@@ -15,4 +15,5 @@ def create_user_services(_in: UserServicesCreate):
         db.commit()
         return user_services_new
     except:    
+        db.rollback()
         return None

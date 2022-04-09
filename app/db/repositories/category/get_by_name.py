@@ -8,6 +8,6 @@ db = SessionLocal()
 
 
 def get_by_name_category(name: str):
-    db.close()
     respon = db.query(Category).filter(Category.name.like(f'%{name}%')).all()
+    db.close()
     return respon

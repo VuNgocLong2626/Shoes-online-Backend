@@ -15,4 +15,5 @@ def create_comment(comment_in: CommentCreate):
         db.commit()
         return comment_new
     except:    
+        db.rollback()
         return None

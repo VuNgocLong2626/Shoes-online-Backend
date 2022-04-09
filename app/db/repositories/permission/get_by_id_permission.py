@@ -8,4 +8,5 @@ db = SessionLocal()
 
 def get_by_id_permission(id: int):
     permissions = db.query(Permission).filter(Permission.id_permission == id).first()
+    db.close()
     return permissions

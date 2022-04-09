@@ -9,3 +9,4 @@ db = SessionLocal()
 def delete_category(id_category: int):
     db.query(Category).filter(Category.id_category == id_category).delete()
     db.commit()
+    db.close()

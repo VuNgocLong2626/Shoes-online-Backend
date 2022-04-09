@@ -8,6 +8,6 @@ db = SessionLocal()
 
 
 def get_all_quantity():
-    db.close()
     respon = db.query(SizeQuantity).all()
+    db.close()
     return respon

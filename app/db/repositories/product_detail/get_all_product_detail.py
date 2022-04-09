@@ -8,6 +8,6 @@ db = SessionLocal()
 
 
 def get_all_product_detail():
-    db.commit()
     respon = db.query(ProductDetail).all()
+    db.close()
     return respon

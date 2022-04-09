@@ -15,4 +15,5 @@ def create_rate(rate_in: RateCreate):
         db.commit()
         return rate_new
     except:    
+        db.rollback()
         return None

@@ -15,4 +15,5 @@ def create_size_quatity(size_quatity_in: SizeQuantityCreate):
         db.commit()
         return size_quatity_new
     except:    
+        db.rollback()
         return None

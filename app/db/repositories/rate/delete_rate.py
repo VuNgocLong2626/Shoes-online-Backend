@@ -10,4 +10,5 @@ db = SessionLocal()
 def delete_rate(id_rate: int):
     db.query(Rate).filter(Rate.id_rate == id_rate).delete()
     db.commit()
+    db.close()
     return id_rate

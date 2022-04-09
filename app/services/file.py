@@ -11,3 +11,6 @@ class ImageService():
         return HTTPException(
             status_code=404, detail="File not found!"
         )
+
+    def read_excel():
+        return

@@ -15,5 +15,5 @@ def create_user(user_in: UserInDB):
         db.commit()
         return new_user
     except:
-        db.rollback()    
+        db.rollback()
         return None

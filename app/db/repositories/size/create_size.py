@@ -15,4 +15,5 @@ def create_size(size_in: SizeCreate):
         db.commit()
         return size_new
     except:    
+        db.rollback()
         return false

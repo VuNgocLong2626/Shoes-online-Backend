@@ -7,6 +7,6 @@ db = SessionLocal()
 
 
 def get_all_color():
-    db.close()
     color_all = db.query(Color).all()
+    db.close()
     return color_all

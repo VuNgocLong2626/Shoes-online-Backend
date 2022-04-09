@@ -8,6 +8,6 @@ db = SessionLocal()
 
 
 def get_by_id_info(id_info: int):
-    db.rollback()
     respon = db.query(Info).filter(Info.id_info == id_info).first()
+    db.close()
     return respon

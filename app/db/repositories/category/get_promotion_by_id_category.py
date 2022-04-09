@@ -8,6 +8,6 @@ db = SessionLocal()
 
 
 def get_promotion_by_id_category(id_category: int):
-    db.close()
     respon = db.query(Category, Promotion.reduction).join(Promotion).filter(Category.id_category == id_category).first()
+    db.close()
     return respon

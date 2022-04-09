@@ -8,6 +8,6 @@ db = SessionLocal()
 
 
 def get_quantity_by_id_product_detail(id_product_detail: int):
-    db.close()
     respon = db.query(SizeQuantity, Size.size_number).join(Size).filter(SizeQuantity.id_product_detail == id_product_detail).all()
+    db.close()
     return respon

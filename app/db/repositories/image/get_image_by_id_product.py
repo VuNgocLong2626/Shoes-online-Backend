@@ -8,8 +8,8 @@ db = SessionLocal()
 
 
 def get_image_by_id_product(id_product_detail: int):
-    db.close()
     # respon = db.query(Image.path).filter(Image.id_product_detail == id_product_detail).all()
     # with_entities
     respon = db.query(Image).with_entities(Image.path).filter(Image.id_product_detail == id_product_detail).all()
+    db.close()
     return respon

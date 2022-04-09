@@ -8,6 +8,7 @@ db = SessionLocal()
 
 
 def create_services(_in: ServicesCreate):
+    
     services_new = Services(**_in.dict(), id_verifier=sqlalchemy.sql.null())
     db.add(services_new)
     try:
@@ -15,4 +16,5 @@ def create_services(_in: ServicesCreate):
         db.commit()
         return services_new
     except:    
+        db.rollback()
         return None

@@ -12,5 +12,5 @@ def update_nameser(nameser_in: NameServicesUpdate):
         .filter(NameServices.id_name_services == nameser_in.id_name_services)\
         .update({NameServices.name: nameser_in.name})
     db.commit()
-
+    db.close()
     return nameser_in

@@ -8,6 +8,6 @@ db = SessionLocal()
 
 
 def get_by_id_gender(id_gender: int):
-    db.commit()
     respon = db.query(Gender).filter(Gender.id_gender == id_gender).first()
+    db.close()
     return respon

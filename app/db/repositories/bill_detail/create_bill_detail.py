@@ -15,5 +15,6 @@ def create_bill_detail(bill_detail_in: BillDetailCreate):
         db.flush()
         db.commit()
         return bill_new
-    except:    
+    except:
+        db.rollback() 
         return None

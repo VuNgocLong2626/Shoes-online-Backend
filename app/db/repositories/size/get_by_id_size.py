@@ -8,6 +8,6 @@ db = SessionLocal()
 
 
 def get_by_id_size(id_size: int):
-    db.commit()
     respon = db.query(Size).filter(Size.id_size == id_size).first()
+    db.close()
     return respon

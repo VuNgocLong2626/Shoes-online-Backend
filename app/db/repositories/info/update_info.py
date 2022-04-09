@@ -19,6 +19,8 @@ def update_info(user: UserToken, info_in: InfoUpdate):
                 Info.phone: info_in.phone
                 })
         db.commit()
+        db.close()
         return info_in
     except:
+        db.close()
         return None

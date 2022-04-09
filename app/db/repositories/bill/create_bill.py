@@ -15,5 +15,6 @@ def create_bill(bill_in: BillCreate):
         db.flush()
         db.commit()
         return bill_new
-    except:    
+    except:
+        db.rollback()  
         return None

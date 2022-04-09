@@ -8,6 +8,6 @@ db = SessionLocal()
 
 
 def get_by_id_color(id_color: int):
-    db.close()
     respon = db.query(Color).filter(Color.id_color == id_color).first()
+    db.close()
     return respon

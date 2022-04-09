@@ -9,6 +9,6 @@ db = SessionLocal()
 
 
 def get_by_in_id_color(id_color: List[int]):
-    db.close()
     respon = db.query(Product).join(ProductDetail).filter(ProductDetail.id_color.in_(id_color)).all()
+    db.close()
     return respon

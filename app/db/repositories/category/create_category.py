@@ -18,5 +18,6 @@ def create_category(category_in: CategoryCreate):
         db.flush()
         db.commit()
         return category_new
-    except:    
+    except:
+        db.rollback()
         return None

@@ -8,4 +8,5 @@ db = SessionLocal()
 
 def get_all():
     permissions = db.query(Permission).all()
+    db.close()
     return permissions

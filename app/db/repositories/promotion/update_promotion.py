@@ -17,6 +17,7 @@ def update_promotion(promotion_in: PromotionUpdate):
             Promotion.reduction: promotion_in.reduction
                 })
         db.commit()
+        db.close()
         return promotion_in
     except:
         return None

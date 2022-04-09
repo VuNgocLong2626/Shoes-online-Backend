@@ -8,6 +8,6 @@ db = SessionLocal()
 
 
 def get_quantity_by_id_size_quantity(id_size_quantity: int):
-    db.close()
     respon = db.query(SizeQuantity, Size).join(Size).filter(SizeQuantity.id_size_quantity == id_size_quantity).first()
+    db.close()
     return respon

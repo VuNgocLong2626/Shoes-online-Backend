@@ -34,8 +34,8 @@ class ProductServices():
 
     def create_product_basic(product_new: _product_schemas.ProductCreateForm):
         respon = create_product(product_new)
-        if respon is None:
-            raise get_product_create_exception()
+        # if respon is None:
+        #     raise get_product_create_exception()
         
         return respon
         

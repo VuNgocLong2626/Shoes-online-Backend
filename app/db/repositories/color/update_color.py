@@ -13,6 +13,7 @@ def update_color(color_in: ColorUpdate):
             .filter(Color.id_color == color_in.id_color)\
             .update({Color.hex: color_in.hex})
         db.commit()
+        db.close()
         return color_in
     except:
         return None

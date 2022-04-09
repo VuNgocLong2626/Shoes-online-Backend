@@ -9,9 +9,9 @@ db = SessionLocal()
 
 
 def get_all_product_basic(_gender: Optional[str] = None):
-    db.close()
     if _gender is None:
         respon = db.query(Product).all()
     else:
         respon = db.query(Product).join(Gender).filter(Gender.name == _gender).all()
+    db.close()
     return respon

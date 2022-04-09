@@ -16,6 +16,7 @@ def update_services(_in: ServicesUpdate,user_in: UserToken):
                 Services.id_verifier: user_in.id_user
             })
         db.commit()
+        db.close()
         return _in
     except:
         return None

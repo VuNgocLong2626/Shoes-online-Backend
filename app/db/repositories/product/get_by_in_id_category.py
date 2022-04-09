@@ -9,6 +9,6 @@ db = SessionLocal()
 
 
 def get_by_in_id_category(id_category: List[int]):
-    db.close()
     respon = db.query(Product).filter(Product.id_category.in_(id_category)).all()
+    db.close()
     return respon

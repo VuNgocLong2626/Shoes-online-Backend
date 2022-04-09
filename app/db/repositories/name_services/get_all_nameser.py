@@ -8,6 +8,6 @@ db = SessionLocal()
 
 
 def get_all_nameser():
-    db.close()
     nameser_all = db.query(NameServices).all()
+    db.close()
     return nameser_all

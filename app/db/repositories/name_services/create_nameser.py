@@ -15,4 +15,5 @@ def create_nameser(nameser_in: NameServicesCreate):
         db.commit()
         return nameser_new
     except:    
+        db.rollback()
         return None

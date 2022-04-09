@@ -15,4 +15,5 @@ def create_rate_comment(_in: CommentRateCreate):
         db.commit()
         return comment_new
     except:    
+        db.rollback()
         return None

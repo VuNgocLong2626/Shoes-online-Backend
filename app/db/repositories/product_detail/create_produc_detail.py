@@ -15,4 +15,5 @@ def create_product_detail(product_in: ProductDetailCreate):
         db.commit()
         return product_new
     except:    
+        db.rollback()
         return None

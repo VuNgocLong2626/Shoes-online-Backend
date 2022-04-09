@@ -7,6 +7,6 @@ db = SessionLocal()
 
 
 def get_by_id_user_and_bill(id_user: int, id_bill: int):
-    db.close()
     respon = db.query(Bill).filter(Bill.id_user== id_user, Bill.id_bill==id_bill).first()
+    db.close()
     return respon

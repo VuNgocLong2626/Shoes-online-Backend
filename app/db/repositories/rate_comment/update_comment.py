@@ -16,7 +16,7 @@ def update_comment(comment_in: CommentUpdate):
                 Comments.Date: comment_in.Date
                     })
         db.commit()
-
+        db.close()
         return comment_in
     except:
         return None

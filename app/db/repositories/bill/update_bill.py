@@ -16,6 +16,7 @@ def update_bill(bill_in: BillUpdate):
             Bill.status: bill_in.status
                 })
         db.commit()
+        db.close()
         return bill_in
     except:
         return None

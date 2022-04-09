@@ -8,6 +8,6 @@ db = SessionLocal()
 
 
 def get_all_gender():
-    db.commit()
     respon = db.query(Gender).all()
+    db.close()
     return respon

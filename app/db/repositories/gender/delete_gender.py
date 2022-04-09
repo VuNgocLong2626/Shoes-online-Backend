@@ -11,6 +11,8 @@ def delete_gender(id_gender: int):
     try:
         db.query(Gender).filter(Gender.id_gender == id_gender).delete()
         db.commit()
+        db.close()
         return True
     except:
+        db.close()
         return None

@@ -19,5 +19,6 @@ def create_image(image: str, id_product: int):
         db.flush()
         db.commit()
         return image_new
-    except:    
+    except:
+        db.rollback()    
         return None

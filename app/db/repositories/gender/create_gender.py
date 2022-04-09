@@ -15,4 +15,5 @@ def create_gender(gender_in: GenderCreate):
         db.commit()
         return gender_new
     except:    
+        db.rollback()
         return None

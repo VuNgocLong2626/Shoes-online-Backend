@@ -13,7 +13,7 @@ def update_size(size_in: SizeUpdate):
             .filter(Size.id_size == size_in.id_size)\
             .update({Size.size_number: size_in.size_number})
         db.commit()
-
+        db.close()
         return size_in
     except:
         return None

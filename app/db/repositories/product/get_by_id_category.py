@@ -8,6 +8,6 @@ db = SessionLocal()
 
 
 def get_by_id_category(id_category: int):
-    db.close()
     respon = db.query(Product).filter(Product.id_category == id_category).all()
+    db.close()
     return respon
