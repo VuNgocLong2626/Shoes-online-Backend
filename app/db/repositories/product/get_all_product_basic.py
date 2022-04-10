@@ -8,10 +8,10 @@ from app.db.tables import Product, Gender
 db = SessionLocal()
 
 
-def get_all_product_basic(_gender: Optional[str] = None):
-    if _gender is None:
+def get_all_product_basic(id_gender: Optional[int] = None):
+    if id_gender is None:
         respon = db.query(Product).all()
     else:
-        respon = db.query(Product).join(Gender).filter(Gender.name == _gender).all()
+        respon = db.query(Product).join(Gender).filter(Gender.id_gender == id_gender).all()
     db.close()
     return respon

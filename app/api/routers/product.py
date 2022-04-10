@@ -77,8 +77,8 @@ async def update_size_quantity(quantity_in: _size_quatity_schemas.SizeQuantityDe
     return respon
 
 @router.get("/all-product")
-async def get_all_product(_gender: Optional[str] = None):
-    respon = ProductServices.get_all_product(_gender)
+async def get_all_product(id_gender: Optional[int] = None):
+    respon = ProductServices.get_all_product(id_gender)
     return respon
 
 @router.post("/filter-product")
