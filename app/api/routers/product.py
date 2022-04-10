@@ -35,6 +35,7 @@ async def update_product_basic(product_in: _product_schemas.ProductUpdateForm):
     respon = ProductServices.update_product_basic(product_in)
     return respon
 
+# Product Detail
 @router.post("/create-product-detail")
 async def create_produc_deatil(
     id_product: int,
@@ -47,6 +48,16 @@ async def create_produc_deatil(
 @router.get("/all-product-detail")
 async def get_all_product_detail():
     respon = ProductServices.get_all_product_detail()
+    return respon
+
+@router.put("/update-product-detail")
+async def update_product_detail(   
+    id_product_detail: int, 
+    id_product: int,
+    id_color: int ,
+    file: List[UploadFile] 
+):
+    respon = ProductServices.update_produc_detail(id_product_detail, id_product, id_color, file)
     return respon
 
 # deficient upate product detail
@@ -83,4 +94,9 @@ async def get_search_product(name: str):
 @router.get("/test/")
 async def get(id: int):
     respon = ProductServices.test(id)
+    return respon
+
+@router.get("/first-product/{id_product}")
+async def get_all_product(id_product: int):
+    respon = ProductServices.get_id_product(id_product)
     return respon

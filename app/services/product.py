@@ -25,6 +25,9 @@ from app.db.repositories.product.get_by_in_id_category import get_by_in_id_categ
 from app.db.repositories.product.get_by_in_id_color import get_by_in_id_color
 from app.db.repositories.product.get_by_in_id_category_and_color import get_by_in_id_category_and_color
 from app.db.repositories.product.get_product_by_name import get_product_by_name
+from app.db.repositories.product_detail.update_product_detail import update_product_detail
+from app.db.repositories.image.delete_all_image import delete_all_image
+from app.db.repositories.product.get_by_id_product import get_by_id_product
 
 
 class ProductServices():
@@ -82,6 +85,37 @@ class ProductServices():
 
         return respon_product_detail
 
+    def update_produc_detail(
+        id_product_detail: int,    
+        id_product: int,
+        id_color: int,
+        files: List[UploadFile]
+    ):
+        product_detail = _product_detail_schemas.ProductDetailUpdate(**{
+            "id_product_detail": id_product_detail,
+            "id_color": id_color,
+            "id_product": id_product
+        })
+
+        respon_product_detail = update_product_detail(product_detail)
+        if respon_product_detail is None:
+            raise get_product_create_exception()
+        _image_utils.delete_product_image(id_product)
+        delete_all_image(id_product_detail)
+
+        image_responses = []
+        for index, file in enumerate(files, start=1):
+            image_db = _image_utils.create_product_image(
+                id_product, file,
+                index
+            )
+            image_responses.append(image_db)
+            image_in = f'http://127.0.0.1:8000/file/?image_path={image_db}'
+            # print(image_in)
+            create_image(image_in, respon_product_detail.id_product_detail)
+
+        return respon_product_detail
+
     def get_all_product_detail():
         respon_product_details = get_all_product_detail()
         respon = []
@@ -115,6 +149,13 @@ class ProductServices():
         product_all = get_by_in_id_color(fillter_in.list_id_color)
         respon_not_category = get_all_main(product_all)
         return respon_not_category
+    
+    def get_id_product(id_product: int):
+        product_in = []
+        product = get_by_id_product(id_product)
+        product_in.append(product)
+        respon = get_all_main(product_in)
+        return respon[0]
 
     def search_product_by_name(name: str):
         product_all = get_product_by_name(name)

@@ -28,6 +28,12 @@ def create_product_image(
         shutil.copyfileobj (file.file, file_object)
     return file_location
 
+def delete_product_image(
+    product_id: int
+):
+    save_file = f'media/products/{product_id}/images'
+    shutil.rmtree(save_file)
+
 
 def get_file_extension(filename: str):
     return filename.split(".")[-1]

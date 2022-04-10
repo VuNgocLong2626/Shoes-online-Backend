@@ -30,3 +30,8 @@ async def update_rate(rate_in: _rate_schemas.RateUpdate):
 async def delete_rate(id_rate: int):
     respon = RateServices.delete_rate(id_rate)
     return respon
+
+@router.get("/average-start/{id_product}")
+async def average_start(id_product: int):
+    respon = RateServices.get_aver_id_product(id_product)
+    return respon

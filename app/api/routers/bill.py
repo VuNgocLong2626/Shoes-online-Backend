@@ -4,6 +4,7 @@ from typing import List, Optional
 from app.services.bill import BillServices
 from app.models.schemas import bill as _bill_schemas
 from app.services.athu import get_current_user, get_current_admin
+from app.db.repositories.bill.get_count_bill import get_count_bill
 
 
 router = APIRouter(
@@ -30,4 +31,9 @@ async def get_bill(user_in: dict = Depends(get_current_admin), id_bill: Optional
 @router.put("/")
 async def update_bill(bill_in: _bill_schemas.BillUpdate, user_in: dict = Depends(get_current_admin)):
     respon = BillServices.update_bill(user_in, bill_in)
+    return respon
+
+@router.get("/get-count-bill/")
+async def get_count_bil():
+    respon = get_count_bill() + 1
     return respon

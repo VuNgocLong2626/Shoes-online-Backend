@@ -5,6 +5,7 @@ from app.db.repositories.rate.create_rate import create_rate
 from app.db.repositories.rate.delete_rate import delete_rate
 from app.db.repositories.rate.update_rate import update_rate
 from app.db.repositories.rate.get_all_rate import get_all_rate
+from app.db.repositories.rate_comment.get_comment_join_rate_comment import get_comment_join_rate_comment
 
 
 class RateServices():
@@ -31,6 +32,13 @@ class RateServices():
     def get_all_rate():
         respon = get_all_rate()
         return respon
+
+    def get_aver_id_product(id_product):
+        respon_all_start = get_comment_join_rate_comment(id_product)
+        all_rate = 0
+        for start in respon_all_start:
+            all_rate += start.Rate.number_star
+        return all_rate / len(respon_all_start)
 
 
 def get_rate_exception():
