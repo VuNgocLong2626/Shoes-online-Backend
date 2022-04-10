@@ -78,7 +78,7 @@ class ProductServices():
             image_responses.append(image_db)
             image_in = f'http://127.0.0.1:8000/file/?image_path={image_db}'
             # print(image_in)
-            create_image(image_db, respon_product_detail.id_product_detail)
+            create_image(image_in, respon_product_detail.id_product_detail)
 
         return respon_product_detail
 

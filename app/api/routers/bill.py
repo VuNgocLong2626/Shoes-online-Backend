@@ -3,7 +3,7 @@ from sqlalchemy import null
 from typing import List, Optional
 from app.services.bill import BillServices
 from app.models.schemas import bill as _bill_schemas
-from app.services.athu import get_current_user
+from app.services.athu import get_current_user, get_current_admin
 
 
 router = APIRouter(
@@ -19,6 +19,11 @@ async def create_bill(bill_in: _bill_schemas.BillCreate):
 
 @router.get("/get-bill/")
 async def get_bill(user_in: dict = Depends(get_current_user), id_bill: Optional[int]=None):
+    respon = BillServices.get_bill(user_in, id_bill)
+    return respon
+
+@router.get("/admin-get-bill/")
+async def get_bill(user_in: dict = Depends(get_current_admin), id_bill: Optional[int]=None):
     respon = BillServices.get_bill(user_in, id_bill)
     return respon
 

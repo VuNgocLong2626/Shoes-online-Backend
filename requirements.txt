@@ -15,3 +15,6 @@ paypal-checkout-serversdk
 python-dotenv
 googledrivedownloader
 pandas
+xlrd
+openpyxl
+odfpy
