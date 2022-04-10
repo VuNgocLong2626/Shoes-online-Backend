@@ -28,7 +28,7 @@ CREATE TABLE `bill` (
   `id_verifier` int DEFAULT NULL,
   `status` varchar(250) DEFAULT NULL,
   `date_create` datetime DEFAULT NULL,
-  `total` varchar(250) DEFAULT NULL,
+  `total` int DEFAULT NULL,
   `method` varchar(250) DEFAULT NULL,
   `address` varchar(250) DEFAULT NULL,
   PRIMARY KEY (`id_bill`),
@@ -37,7 +37,7 @@ CREATE TABLE `bill` (
   KEY `ix_bill_id_bill` (`id_bill`),
   CONSTRAINT `bill_ibfk_1` FOREIGN KEY (`id_user`) REFERENCES `user` (`id_user`) ON DELETE CASCADE,
   CONSTRAINT `bill_ibfk_2` FOREIGN KEY (`id_verifier`) REFERENCES `user` (`id_user`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -46,7 +46,7 @@ CREATE TABLE `bill` (
 
 LOCK TABLES `bill` WRITE;
 /*!40000 ALTER TABLE `bill` DISABLE KEYS */;
-INSERT INTO `bill` VALUES (2,2,NULL,'Chưa Xử lý','2022-04-10 00:00:00','720000','COD','Can Tho'),(3,2,NULL,'Chưa Xử lý','2022-04-10 00:00:00','980000','COD','Can Tho');
+INSERT INTO `bill` VALUES (1,3,NULL,'Chua','2022-04-10 00:00:00',720000,'COD','Can tho'),(2,3,NULL,'Chua','2022-04-10 00:00:00',980000,'COD','Can tho');
 /*!40000 ALTER TABLE `bill` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -80,7 +80,7 @@ CREATE TABLE `bill_details` (
 
 LOCK TABLES `bill_details` WRITE;
 /*!40000 ALTER TABLE `bill_details` DISABLE KEYS */;
-INSERT INTO `bill_details` VALUES (1,2,6,1,720000,8,83),(2,3,5,2,720000,7,68);
+INSERT INTO `bill_details` VALUES (1,1,6,1,720000,8,80),(2,2,5,2,490000,7,68);
 /*!40000 ALTER TABLE `bill_details` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -244,7 +244,7 @@ CREATE TABLE `info` (
 
 LOCK TABLES `info` WRITE;
 /*!40000 ALTER TABLE `info` DISABLE KEYS */;
-INSERT INTO `info` VALUES (1,'0828764625','Vũ Ngọc Long','2000-03-30 00:00:00','long.speed00@gmail.com','Bac Lieu'),(2,'0828764625','Vũ Ngọc Long','2000-03-30 00:00:00','long.speed00@gmail.com','Bac Lieu'),(3,'08287646256','Vu Quang Hung','2000-10-21 00:00:00','hung2000@gmail.com','Can Tho');
+INSERT INTO `info` VALUES (1,'0828764625','Vu Ngoc Long','2000-03-30 00:00:00','long.speed00@gmail.com','Bac Lieu'),(2,'0828764622','Nhan Vien 1','2000-02-20 00:00:00','nhanvie1n@gmail.com','Bac Lieu'),(3,'0828764632','Vu Quang Hung','2000-10-21 00:00:00','hung2000@gmail.com','Can tho');
 /*!40000 ALTER TABLE `info` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -398,7 +398,7 @@ CREATE TABLE `rate` (
   `number_star` int DEFAULT NULL,
   PRIMARY KEY (`id_rate`),
   KEY `ix_rate_id_rate` (`id_rate`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -407,7 +407,7 @@ CREATE TABLE `rate` (
 
 LOCK TABLES `rate` WRITE;
 /*!40000 ALTER TABLE `rate` DISABLE KEYS */;
-INSERT INTO `rate` VALUES (1,1),(2,2),(3,3),(4,4),(5,5);
+INSERT INTO `rate` VALUES (1,0),(2,1),(3,2),(4,3),(5,4),(6,5);
 /*!40000 ALTER TABLE `rate` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -528,7 +528,7 @@ CREATE TABLE `size_quantity` (
 
 LOCK TABLES `size_quantity` WRITE;
 /*!40000 ALTER TABLE `size_quantity` DISABLE KEYS */;
-INSERT INTO `size_quantity` VALUES (1,1,1,0,9),(2,1,2,0,9),(3,1,3,0,10),(4,1,4,0,11),(5,1,5,0,15),(6,1,6,0,25),(7,1,7,0,30),(8,1,8,0,15),(9,1,9,0,16),(10,1,10,0,17),(11,1,11,0,18),(12,2,1,0,8),(13,2,2,0,11),(14,2,3,0,10),(15,2,4,0,11),(16,2,5,0,15),(17,2,6,0,25),(18,2,7,0,30),(19,2,8,0,15),(20,2,9,0,16),(21,2,10,0,17),(22,2,11,0,18),(23,3,1,0,7),(24,3,2,0,10),(25,3,3,0,10),(26,3,4,0,11),(27,3,5,0,15),(28,3,6,0,25),(29,3,7,0,30),(30,3,8,0,15),(31,3,9,0,16),(32,3,10,0,17),(33,3,11,0,18),(34,4,1,0,9),(35,4,2,0,9),(36,4,3,0,10),(37,4,4,0,11),(38,4,5,0,15),(39,4,6,0,25),(40,4,7,0,30),(41,4,8,0,15),(42,4,9,0,16),(43,4,10,0,17),(44,4,11,0,18),(45,5,1,0,9),(46,5,2,0,9),(47,5,3,0,10),(48,5,4,0,11),(49,5,5,0,15),(50,5,6,0,25),(51,5,7,0,30),(52,5,8,0,15),(53,5,9,0,16),(54,5,10,0,17),(55,5,11,0,18),(56,6,1,0,10),(57,6,2,0,9),(58,6,3,0,10),(59,6,4,0,11),(60,6,5,0,15),(61,6,6,0,25),(62,6,7,0,30),(63,6,8,0,15),(64,6,9,0,16),(65,6,10,0,17),(66,6,11,0,18),(67,7,1,0,9),(68,7,2,2,7),(69,7,3,0,10),(70,7,4,0,11),(71,7,5,0,15),(72,7,6,0,25),(73,7,7,0,30),(74,7,8,0,15),(75,7,9,0,16),(76,7,10,0,17),(77,7,11,0,18),(78,8,1,0,9),(79,8,2,0,9),(80,8,3,0,10),(81,8,4,0,11),(82,8,5,0,15),(83,8,6,1,24),(84,8,7,0,30),(85,8,8,0,15),(86,8,9,0,16),(87,8,10,0,17),(88,8,11,0,18);
+INSERT INTO `size_quantity` VALUES (1,1,1,0,9),(2,1,2,0,9),(3,1,3,0,10),(4,1,4,0,11),(5,1,5,0,15),(6,1,6,0,25),(7,1,7,0,30),(8,1,8,0,15),(9,1,9,0,16),(10,1,10,0,17),(11,1,11,0,18),(12,2,1,0,8),(13,2,2,0,11),(14,2,3,0,10),(15,2,4,0,11),(16,2,5,0,15),(17,2,6,0,25),(18,2,7,0,30),(19,2,8,0,15),(20,2,9,0,16),(21,2,10,0,17),(22,2,11,0,18),(23,3,1,0,7),(24,3,2,0,10),(25,3,3,0,10),(26,3,4,0,11),(27,3,5,0,15),(28,3,6,0,25),(29,3,7,0,30),(30,3,8,0,15),(31,3,9,0,16),(32,3,10,0,17),(33,3,11,0,18),(34,4,1,0,9),(35,4,2,0,9),(36,4,3,0,10),(37,4,4,0,11),(38,4,5,0,15),(39,4,6,0,25),(40,4,7,0,30),(41,4,8,0,15),(42,4,9,0,16),(43,4,10,0,17),(44,4,11,0,18),(45,5,1,0,9),(46,5,2,0,9),(47,5,3,0,10),(48,5,4,0,11),(49,5,5,0,15),(50,5,6,0,25),(51,5,7,0,30),(52,5,8,0,15),(53,5,9,0,16),(54,5,10,0,17),(55,5,11,0,18),(56,6,1,0,10),(57,6,2,0,9),(58,6,3,0,10),(59,6,4,0,11),(60,6,5,0,15),(61,6,6,0,25),(62,6,7,0,30),(63,6,8,0,15),(64,6,9,0,16),(65,6,10,0,17),(66,6,11,0,18),(67,7,1,0,9),(68,7,2,2,7),(69,7,3,0,10),(70,7,4,0,11),(71,7,5,0,15),(72,7,6,0,25),(73,7,7,0,30),(74,7,8,0,15),(75,7,9,0,16),(76,7,10,0,17),(77,7,11,0,18),(78,8,1,0,9),(79,8,2,0,9),(80,8,3,1,9),(81,8,4,0,11),(82,8,5,0,15),(83,8,6,0,25),(84,8,7,0,30),(85,8,8,0,15),(86,8,9,0,16),(87,8,10,0,17),(88,8,11,0,18);
 /*!40000 ALTER TABLE `size_quantity` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -561,7 +561,7 @@ CREATE TABLE `user` (
 
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` VALUES (2,2,1,'long2000','$2b$12$DVWItDTfLFYJltznD5IRXeyqv/pTZd52KZhMiti19Q/4Q3ZqrbRei'),(3,3,3,'hung','$2b$12$gn7v7kNz.rMyreoQWNT6meAZYrXt4j7PBnzYofWYtPEZU8a4iGvCu');
+INSERT INTO `user` VALUES (1,1,1,'long','$2b$12$Ph62RyiwKZfwgZBdmvZpQOWzIpoSVQNfKAG/I6HyTPKj/msHHHWNC'),(2,2,2,'nhanvien1','$2b$12$HkKZAlav8M1f2s7vxIUtAegkfu8PdES1NTXtATeIkTzxKDmfSIjki'),(3,3,3,'hung','$2b$12$c737ZfewqiEik4GKcljnyOeiDWeb0N52n41tlplj7jxgRqKi0n9D2');
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -600,4 +600,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-04-10 13:56:59
+-- Dump completed on 2022-04-10 14:41:43

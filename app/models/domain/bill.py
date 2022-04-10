@@ -11,7 +11,7 @@ class BillCreate(BaseModel):
 
 
 class BillTotal(BaseModel):
-    total: str = Field(None, alias='total')
+    total: int = Field(None, alias='total')
 
 
 class BillMethod(BaseModel):

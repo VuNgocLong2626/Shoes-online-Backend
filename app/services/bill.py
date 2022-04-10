@@ -1,3 +1,5 @@
+from os import name
+from numpy import product
 from sqlalchemy import false
 from app.models.schemas import (
                                 bill as _bill_schemas,
@@ -10,6 +12,9 @@ from app.db.repositories.bill.create_bill import create_bill
 from app.db.repositories.bill.get_by_id_user import get_by_id_user
 from app.db.repositories.bill.get_by_id_user_and_bill import get_by_id_user_and_bill
 from app.db.repositories.bill.update_bill import update_bill
+from app.db.repositories.bill.get_bil_all import get_bill_all
+from app.db.repositories.bill.get_bill_id_bill import get_by_id_bill
+
 
 from app.db.repositories.bill_detail.create_bill_detail import create_bill_detail
 from app.db.repositories.bill_detail.get_bill_detail_by_id_bill import get_bill_detail_by_id_bill
@@ -18,6 +23,7 @@ from app.db.repositories.product_detail.get_all_john_image import get_all_john_i
 from app.db.repositories.size_quantity.get_quantity_by_id_size_quantity import get_quantity_by_id_size_quantity
 from app.db.repositories.permission.get_by_id_permission import get_by_id_permission
 from app.db.repositories.size_quantity.update_quantity_buy import update_quantity_buy
+from app.db.repositories.product.get_by_id_product import get_by_id_product
 
 
 class BillServices():
@@ -67,10 +73,12 @@ class BillServices():
             # print()
             image_color = get_first_image_by_id_product(detail.id_product_detail)
             size = get_quantity_by_id_size_quantity(detail.id_size_quantity)
+            product = get_by_id_product(detail.id_product)
             respon_detail.update({
                                 "path": image_color.Image.path,
                                 "hex": image_color.Color.hex,
-                                "size": size.Size.size_number
+                                "size": size.Size.size_number,
+                                "name": product.name
                                 })
             list_bill_detail.append(respon_detail)
 
@@ -86,6 +94,38 @@ class BillServices():
         respon = update_bill(bill_in)
         if respon is None:
             raise get_bill_exception()
+        return respon
+
+    def get_bill_all( id_bill: Optional[int]=None):
+        if id_bill is None:
+            bill_all = get_bill_all()
+            return bill_all
+        bill = get_by_id_bill(id_bill)
+        if bill is None:
+            raise get_bill_exception()
+
+        list_bill_detail = []
+        bill_details = get_bill_detail_by_id_bill(bill.id_bill)
+        for detail in bill_details:
+            respon_detail = {
+                "current_price": detail.current_price,
+                "quantily": detail.quantily,
+                "id_product": detail.id_product,
+                }
+            # print()
+            image_color = get_first_image_by_id_product(detail.id_product_detail)
+            size = get_quantity_by_id_size_quantity(detail.id_size_quantity)
+            product = get_by_id_product(detail.id_product)
+            respon_detail.update({
+                                "path": image_color.Image.path,
+                                "hex": image_color.Color.hex,
+                                "size": size.Size.size_number,
+                                "name": product.name
+                                })
+            list_bill_detail.append(respon_detail)
+
+        respon = {**bill.__dict__}
+        respon.update({"list_product_details": list_bill_detail})
         return respon
 
 

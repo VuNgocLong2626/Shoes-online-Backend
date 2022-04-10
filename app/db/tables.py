@@ -98,7 +98,7 @@ class Bill(Base):
 
     status = Column(String(250), default=null)
     date_create = Column(DateTime)
-    total = Column(String(250))
+    total = Column(Integer)
     method = Column(String(250))
     address = Column(String(250))
 
