@@ -75,8 +75,8 @@ def read(file: UploadFile = File(None)):
         url_3 = dowload_load_image(str(db.values[8]))
         create_image(url_3,product_detail.id_product_detail)
 
-        url_3 = dowload_load_image(str(db.values[9]))
-        # create_image(url_3,product_detail.id_product_detail)
+        url_4 = dowload_load_image(str(db.values[9]))
+        create_image(url_4,product_detail.id_product_detail)
         #Create or check size and add quantity
         for index in range(10,col):
             list_size_quantity = str(db.values[index]).split("/")
