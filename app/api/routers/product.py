@@ -91,9 +91,9 @@ async def get_search_product(name: str):
     respon = ProductServices.search_product_by_name(name)
     return respon
 
-@router.get("/test/")
-async def get(id: int):
-    respon = ProductServices.test(id)
+@router.get("/promotion-product/{id_promotion}")
+async def get(id_promotion: int):
+    respon = ProductServices.get_all_product_by_id_promotion(id_promotion)
     return respon
 
 @router.get("/first-product/{id_product}")

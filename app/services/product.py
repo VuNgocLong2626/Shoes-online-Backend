@@ -28,6 +28,11 @@ from app.db.repositories.product.get_product_by_name import get_product_by_name
 from app.db.repositories.product_detail.update_product_detail import update_product_detail
 from app.db.repositories.image.delete_all_image import delete_all_image
 from app.db.repositories.product.get_by_id_product import get_by_id_product
+from app.db.repositories.promotion.get_category_by_id_promotion import get_category_by_id_promotion
+from app.db.repositories.product.get_by_list_id_category import get_by_list_id_category
+from app.db.repositories.product.get_by_in_id_color_and_gender import get_by_in_id_color_and_gender
+from app.db.repositories.product.get_by_in_id_category_and_gender import get_by_in_id_category_and_gender
+from app.db.repositories.product.get_by_in_id_category_and_color_and_gender import get_by_in_id_category_and_color_and_gender
 
 
 class ProductServices():
@@ -137,18 +142,32 @@ class ProductServices():
         return respon
 
     def get_filter_product(fillter_in: _product_schemas.ProductFillter):
-        if (not fillter_in.list_id_category is None):
-            # Not Done
-            if (fillter_in.list_id_color is None):
-                product_all = get_by_in_id_category(fillter_in.list_id_category)
-                respon_not_color = get_all_main(product_all)
-                return respon_not_color
-            product_all = get_by_in_id_category_and_color(fillter_in.list_id_category, fillter_in.list_id_color)
-            respon = get_all_main(product_all)
-            return respon
-        product_all = get_by_in_id_color(fillter_in.list_id_color)
-        respon_not_category = get_all_main(product_all)
-        return respon_not_category
+        if fillter_in.id_gender == 0:
+            if (not fillter_in.list_id_category is None):
+                # Not Done
+                if (fillter_in.list_id_color is None):
+                    product_all = get_by_in_id_category(fillter_in.list_id_category)
+                    respon_not_color = get_all_main(product_all)
+                    return respon_not_color
+                product_all = get_by_in_id_category_and_color(fillter_in.list_id_category, fillter_in.list_id_color)
+                respon = get_all_main(product_all)
+                return respon
+            product_all = get_by_in_id_color(fillter_in.list_id_color)
+            respon_not_category = get_all_main(product_all)
+            return respon_not_category
+        else:
+            if not fillter_in.list_id_category is None:
+                if fillter_in.list_id_color is None:
+                    product_all = get_by_in_id_category_and_gender(fillter_in.list_id_category, fillter_in.id_gender)
+                    respon_not_color = get_all_main(product_all)
+                    return respon_not_color
+                product_all = get_by_in_id_category_and_color_and_gender(fillter_in.list_id_category, fillter_in.list_id_color, fillter_in.id_gender)
+                respon = get_all_main(product_all)
+                return respon
+            product_all = get_by_in_id_color_and_gender(fillter_in.list_id_color, fillter_in.id_gender)
+            respon_not_category = get_all_main(product_all)
+            return respon_not_category
+            
     
     def get_id_product(id_product: int):
         product_in = []
@@ -162,8 +181,13 @@ class ProductServices():
         respon = get_all_main(product_all)
         return respon
 
-    def test(id: int):
-        respon = get_discount(id)
+    def get_all_product_by_id_promotion(id: int):
+        respon = get_category_by_id_promotion(id)
+        list_id_category = []
+        for category in respon:
+            list_id_category.append(category.id_category)
+        product_all = get_by_list_id_category(list_id_category)
+        respon = get_all_main(product_all)
         return respon
 
 

@@ -52,6 +52,7 @@ class ProductUpdateForm(
 class ProductFillter(BaseModel):
     list_id_category: List[int] = Field(None)
     list_id_color: List[int] =  Field(None)
-
+    id_gender: int = Field(alias='id_gender')
+    
     class Config:
                 orm_mode = True
