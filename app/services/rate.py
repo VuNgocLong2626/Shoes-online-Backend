@@ -36,6 +36,8 @@ class RateServices():
     def get_aver_id_product(id_product):
         respon_all_start = get_comment_join_rate_comment(id_product)
         all_rate = 0
+        if len(respon_all_start) == 0:
+            return all_rate
         for start in respon_all_start:
             all_rate += start.Rate.number_star
         return all_rate / len(respon_all_start)
