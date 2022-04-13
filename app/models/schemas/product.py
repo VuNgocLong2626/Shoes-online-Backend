@@ -56,3 +56,10 @@ class ProductFillter(BaseModel):
     
     class Config:
                 orm_mode = True
+
+
+class ProductCart(
+    _base.ProductId,
+    _base.ProductDetailsId
+):
+    pass

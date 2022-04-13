@@ -100,3 +100,8 @@ async def get(id_promotion: int):
 async def get_all_product(id_product: int):
     respon = ProductServices.get_id_product(id_product)
     return respon
+
+@router.post("/get-cart-product/")
+async def get_cart_product(product_in: List[_product_schemas.ProductCart]):
+    respon = ProductServices.get_product_cart(product_in)
+    return respon

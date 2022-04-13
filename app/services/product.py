@@ -33,6 +33,7 @@ from app.db.repositories.product.get_by_list_id_category import get_by_list_id_c
 from app.db.repositories.product.get_by_in_id_color_and_gender import get_by_in_id_color_and_gender
 from app.db.repositories.product.get_by_in_id_category_and_gender import get_by_in_id_category_and_gender
 from app.db.repositories.product.get_by_in_id_category_and_color_and_gender import get_by_in_id_category_and_color_and_gender
+from app.db.repositories.product.get_product_by_id_poduct_and_detail import get_product_by_id_poduct_and_detail
 
 
 class ProductServices():
@@ -188,6 +189,13 @@ class ProductServices():
             list_id_category.append(category.id_category)
         product_all = get_by_list_id_category(list_id_category)
         respon = get_all_main(product_all)
+        return respon
+
+    def get_product_cart(produc_in: List[_product_schemas.ProductCart]):
+        respon = []
+        for product in produc_in:
+            result = get_product_by_id_poduct_and_detail(product)
+            respon.append(result)
         return respon
 
 
