@@ -1,4 +1,6 @@
 from sqlalchemy import false
+import json
+
 from app.models.schemas import rate_comment as _rate_comment_schemas
 from fastapi import HTTPException, status
 
@@ -7,6 +9,7 @@ from app.db.repositories.rate_comment.get_comment_join_rate_comment import get_c
 from app.db.repositories.rate_comment.update_comment import update_comment
 
 from app.db.repositories.rate_comment.create_rate_comment import create_rate_comment
+from app.db.repositories.user.get_info_by_id_user import get_info_by_id_user
 
 
 class RateCommentServices():
@@ -24,7 +27,14 @@ class RateCommentServices():
         return respon
 
     def get_comment_id_product(id_product: int):
-        respon = get_comment_join_rate_comment(id_product)
+        results = get_comment_join_rate_comment(id_product)
+        respon = []
+        for result in results:
+            dict_re = {**dict(result)}
+            user_info = get_info_by_id_user(result.Comments.id_user)
+            dict_re.update({"Info": user_info})
+            respon.append(dict_re)
+
         return respon
 
     def update_comment(comment_in: _rate_comment_schemas.CommentUpdate):
