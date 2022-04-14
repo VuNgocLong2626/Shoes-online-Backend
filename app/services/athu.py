@@ -1,7 +1,7 @@
 from fastapi import HTTPException, status, Depends
 from typing import Optional
 from passlib.context import CryptContext
-from fastapi.security import OAuth2PasswordRequestForm, OAuth2PasswordBearer
+from fastapi.security import OAuth2PasswordBearer
 from datetime import datetime, timedelta
 from jose import jwt, JWTError
 from app.models.schemas.user import UserToken as _usertoken_schemas
@@ -20,8 +20,10 @@ oauth2_bearer_admin = OAuth2PasswordBearer(tokenUrl="admin/login-form")
 def get_password_hash(password):
     return bcrypt_context.hash(password)
 
+
 def verify_password(plain_password, hashed_password):
-    return bcrypt_context.verify(plain_password,hashed_password)
+    return bcrypt_context.verify(plain_password, hashed_password)
+
 
 def authenticate_user(user_name: str, password: str):
     user = ""
@@ -31,16 +33,20 @@ def authenticate_user(user_name: str, password: str):
         return False
     return user
 
-def create_access_token(user_in: _usertoken_schemas,
-                        expires_delta: Optional[timedelta] = None):
+
+def create_access_token(
+    user_in: _usertoken_schemas,
+    expires_delta: Optional[timedelta] = None
+):
 
     encode = user_in.dict()
     if expires_delta:
         expire = datetime.utcnow() + expires_delta
     else:
-        expire = datetime.utcnow() + timedelta(hours=15) # time
+        expire = datetime.utcnow() + timedelta(hours=15)  # time
     encode.update({"exp": expire})
     return jwt.encode(encode, SECRET_KEY, algorithm=ALGORITHM)
+
 
 async def get_current_user(token: str = Depends(oauth2_bearer)):
     try:
@@ -56,14 +62,15 @@ async def get_current_user(token: str = Depends(oauth2_bearer)):
         if not id_permission == 3:
             raise get_user_exception()
         user_token = _usertoken_schemas(**{
-            "account": account, 
+            "account": account,
             "id_user": id_user,
             "id_permission": id_permission,
             "id_info": id_info
-            })
+        })
         return user_token
     except JWTError:
         raise get_user_exception()
+
 
 async def get_current_admin(token: str = Depends(oauth2_bearer_admin)):
     try:
@@ -79,14 +86,15 @@ async def get_current_admin(token: str = Depends(oauth2_bearer_admin)):
         if id_permission == 3:
             raise get_user_exception()
         user_token = _usertoken_schemas(**{
-            "account": account, 
+            "account": account,
             "id_user": id_user,
             "id_permission": id_permission,
             "id_info": id_info
-            })
+        })
         return user_token
     except JWTError:
         raise get_user_exception()
+
 
 def get_user_exception():
     credentials_exception = HTTPException(

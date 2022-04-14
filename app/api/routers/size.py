@@ -1,6 +1,5 @@
-from fastapi import APIRouter, Response, status, HTTPException
-from sqlalchemy import null
-from typing import List, Optional
+from fastapi import APIRouter
+from typing import List
 from app.services.size import SizeServices
 from app.models.schemas import product_detail as _size_schemas
 
@@ -17,15 +16,18 @@ async def create_size(size_in: _size_schemas.SizeCreate):
     respon = SizeServices.create_size(size_in)
     return respon
 
+
 @router.get("/", response_model=List[_size_schemas.SizeDetail])
 async def get_all():
     respon = SizeServices.get_all_size()
     return respon
 
+
 @router.put("/")
 async def update_size(size_in: _size_schemas.SizeUpdate):
     respon = SizeServices.update_size(size_in)
     return respon
+
 
 @router.delete("/{id_color}")
 async def delete_size(id_size: int):

@@ -1,9 +1,10 @@
 from app.models.domain import (
-                                base as _base,
-                                product as _product_domain)
+    base as _base,
+    product as _product_domain)
 from app.models.schemas import product_detail as _product_detail_schemas
-from typing import List, Dict
+from typing import List
 from pydantic import BaseModel, Field
+
 
 class ProductCreate(
     _product_domain.ProductDetail,
@@ -25,6 +26,7 @@ class ProductCreateForm(
 ):
     pass
 
+
 class ProductDetailForm(
     _base.ProductId,
     _base.CategoryId,
@@ -37,6 +39,7 @@ class ProductDetailForm(
 
     class Config:
         orm_mode = True
+
 
 class ProductUpdateForm(
     _base.ProductId,
@@ -51,11 +54,11 @@ class ProductUpdateForm(
 
 class ProductFillter(BaseModel):
     list_id_category: List[int] = Field(None)
-    list_id_color: List[int] =  Field(None)
+    list_id_color: List[int] = Field(None)
     id_gender: int = Field(alias='id_gender')
-    
+
     class Config:
-                orm_mode = True
+        orm_mode = True
 
 
 class ProductCart(

@@ -1,4 +1,3 @@
-from sqlalchemy import false
 from app.models.schemas import category as _category_schemas
 from fastapi import HTTPException, status
 from app.db.repositories.category.create_category import create_category
@@ -39,26 +38,25 @@ class CategoryServices():
         return respon
 
 
-    
 def get_category_exception():
     credentials_exception = HTTPException(
-        detail= "Not Found",
+        detail="Not Found",
         status_code=status.HTTP_404_NOT_FOUND,
     )
     return credentials_exception
 
+
 def get_category_done():
     credentials_exception = HTTPException(
-        detail= "Done",
+        detail="Done",
         status_code=status.HTTP_200_OK
     )
     return credentials_exception
 
+
 def get_category_create_exception():
     credentials_exception = HTTPException(
-        detail= "Not Create",
+        detail="Not Create",
         status_code=status.HTTP_400_BAD_REQUEST,
     )
     return credentials_exception
-
-    

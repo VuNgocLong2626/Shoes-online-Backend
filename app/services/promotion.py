@@ -1,13 +1,12 @@
-from sqlalchemy import false
 from app.models.schemas import promotion as _promotion_schemas
 from fastapi import HTTPException, status
 from app.db.repositories.promotion.create_promotion import create_promotion
 from app.db.repositories.promotion.get_all_promotion import get_all_promotion
-from app.db.repositories.promotion.get_by_id_promotion import get_by_id_promotion
+from app.db.repositories.promotion.get_by_id_promotion \
+    import get_by_id_promotion
 from app.db.repositories.promotion.update_promotion import update_promotion
 from app.db.repositories.promotion.delete_promotion import delete_promotion
 from app.db.repositories.promotion.get_by_name import get_by_name
-
 
 
 class PromotionServices():
@@ -18,9 +17,9 @@ class PromotionServices():
             if respon is None:
                 raise get_promotion_create_exception()
             return respon
-        except:
+        except Exception:
             raise get_promotion_exception()
-        
+
     def get_all_promotion():
         respon = get_all_promotion()
         return respon
@@ -43,24 +42,25 @@ class PromotionServices():
         return respon
 
 
-
 def get_promotion_exception():
     credentials_exception = HTTPException(
-        detail= "Not Found",
+        detail="Not Found",
         status_code=status.HTTP_404_NOT_FOUND,
     )
     return credentials_exception
 
+
 def get_promotion_done():
     credentials_exception = HTTPException(
-        detail= "Done",
+        detail="Done",
         status_code=status.HTTP_200_OK
     )
     return credentials_exception
 
+
 def get_promotion_create_exception():
     credentials_exception = HTTPException(
-        detail= "Not Create",
+        detail="Not Create",
         status_code=status.HTTP_400_BAD_REQUEST,
     )
     return credentials_exception

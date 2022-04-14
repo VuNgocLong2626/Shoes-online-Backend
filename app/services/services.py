@@ -1,4 +1,3 @@
-from sqlalchemy import false
 from app.models.schemas import (
     uesr_services as _user_services_schemas,
     user as _user_schemas
@@ -34,7 +33,7 @@ class ServicesServices():
             return respon
         except:
             raise get_services_exception()
-    
+
     def get_unconfimred_all():
         respon = get_by_chua_join_user_services()
         return respon

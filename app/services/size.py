@@ -1,4 +1,3 @@
-from sqlalchemy import false
 from app.models.schemas import product_detail as _Size_schemas
 from fastapi import HTTPException, status
 from app.db.repositories.size.create_size import create_size
@@ -37,24 +36,25 @@ class SizeServices():
         return respon
 
 
-
 def get_size_exception():
     credentials_exception = HTTPException(
-        detail= "Not Found",
+        detail="Not Found",
         status_code=status.HTTP_404_NOT_FOUND,
     )
     return credentials_exception
 
+
 def get_size_done():
     credentials_exception = HTTPException(
-        detail= "Done",
+        detail="Done",
         status_code=status.HTTP_200_OK
     )
     return credentials_exception
 
+
 def get_size_create_exception():
     credentials_exception = HTTPException(
-        detail= "Not Create",
+        detail="Not Create",
         status_code=status.HTTP_400_BAD_REQUEST,
     )
     return credentials_exception

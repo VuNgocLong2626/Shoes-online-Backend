@@ -1,6 +1,6 @@
 from app.models.domain import (
-                                base as _base,
-                                rate as _rate_domain)
+    base as _base,
+    rate as _rate_domain)
 
 
 class RateCreate(

@@ -3,11 +3,10 @@ from pydantic import BaseModel, Field
 
 class ProductName(BaseModel):
     name: str = Field(None, alias='name')
-    
+
 
 class ProductDetail(BaseModel):
     detail: str = Field(None, alias='detail')
-
 
 
 class ProductMoney(BaseModel):

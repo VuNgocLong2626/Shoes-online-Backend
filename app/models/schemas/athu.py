@@ -1,4 +1,3 @@
-from email.mime import base
 from pydantic import BaseModel
 from sqlalchemy import true
 from app.models.domain import(
@@ -16,7 +15,7 @@ class token(BaseModel):
 class User(
     _base.UserId, _user_domain.UserAccount,
     _info_domain.InfoEmail, _info_domain.InfoFullName,
-    _info_domain.InfoDOB, _info_domain.InfoPhone,    
+    _info_domain.InfoDOB, _info_domain.InfoPhone,
 ):
 
     class Config:

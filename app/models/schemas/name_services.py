@@ -9,14 +9,15 @@ class NameServicesCreate(_name_services_domain.NameServicesName):
 
 
 class NameServicesDetail(_base.NameServicesId,
-                        _name_services_domain.NameServicesName
-):
+                         _name_services_domain.NameServicesName
+                         ):
     pass
 
     class Config:
         orm_mode = True
 
+
 class NameServicesUpdate(_base.NameServicesId,
-                        _name_services_domain.NameServicesName
-):
+                         _name_services_domain.NameServicesName
+                         ):
     pass

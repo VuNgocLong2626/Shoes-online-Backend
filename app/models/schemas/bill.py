@@ -1,7 +1,7 @@
 from typing import List
 from app.models.domain import (
-                                base as _base,
-                                bill as _bill_domain)
+    base as _base,
+    bill as _bill_domain)
 from app.models.schemas.billdetail import BillDetailInDB
 
 
@@ -49,6 +49,7 @@ class BillInDB(
     _bill_domain.BillAddress
 ):
     pass
+
 
 class GetBill(
     _base.UserId,

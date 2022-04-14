@@ -9,8 +9,8 @@ class PermissionCreate(_permission_domain.PermissionName):
 
 
 class PermissionDetail(
-                    _base.PermissionId,
-                    _permission_domain.PermissionName
+    _base.PermissionId,
+    _permission_domain.PermissionName
 ):
     pass
 
@@ -19,7 +19,7 @@ class PermissionDetail(
 
 
 class PermissionUpdate(
-                    _base.PermissionId,
-                    _permission_domain.PermissionName
+    _base.PermissionId,
+    _permission_domain.PermissionName
 ):
     pass

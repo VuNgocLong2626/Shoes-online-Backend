@@ -1,4 +1,3 @@
-from sqlalchemy import false
 from app.models.schemas import product_detail as _Color_schemas
 from fastapi import HTTPException, status
 from app.db.repositories.color.create_color import create_color
@@ -16,7 +15,7 @@ class ColorServices():
             if respon is None:
                 raise get_color_create_exception()
             return respon
-        except:
+        except Exception:
             raise get_color_create_exception()
 
     def get_all_color():
@@ -37,24 +36,25 @@ class ColorServices():
         return respon
 
 
-
 def get_color_exception():
     credentials_exception = HTTPException(
-        detail= "Not Found",
+        detail="Not Found",
         status_code=status.HTTP_404_NOT_FOUND,
     )
     return credentials_exception
 
+
 def get_color_done():
     credentials_exception = HTTPException(
-        detail= "Done",
+        detail="Done",
         status_code=status.HTTP_200_OK
     )
     return credentials_exception
 
+
 def get_color_create_exception():
     credentials_exception = HTTPException(
-        detail= "Not Create",
+        detail="Not Create",
         status_code=status.HTTP_400_BAD_REQUEST,
     )
     return credentials_exception

@@ -1,5 +1,4 @@
 from fastapi import APIRouter, Response, status, HTTPException
-from sqlalchemy import null
 from typing import List
 from app.services.permission import PermissionService
 from app.models.schemas import permission as _permission_schemas
@@ -22,10 +21,12 @@ async def create_permission(
         raise
     return respon
 
+
 @router.get("/", response_model=List[_permission_schemas.PermissionDetail])
 async def get_all_permission():
     respon = PermissionService.get_all_permission()
     return respon
+
 
 @router.delete("/{id_permission}")
 async def delete_permission(id_permission: int):
@@ -34,6 +35,7 @@ async def delete_permission(id_permission: int):
         status_code=status.HTTP_200_OK,
         detail="Successfull"
     )
+
 
 @router.put("/")
 async def update_permission(

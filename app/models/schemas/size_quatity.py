@@ -1,6 +1,6 @@
 from app.models.domain import (
-                                base as _base,
-                                size_quatity as _size_quatity_domain)
+    base as _base,
+    size_quatity as _size_quatity_domain)
 
 
 class SizeQuantityIn(
@@ -17,7 +17,7 @@ class SizeQuantityCreate(
     _size_quatity_domain.SizeQuantitySold,
     _size_quatity_domain.ProductQuantityQuantity
 ):
-    pass 
+    pass
 
 
 class SizeQuantityDetail(
@@ -27,7 +27,7 @@ class SizeQuantityDetail(
     _size_quatity_domain.SizeQuantitySold,
     _size_quatity_domain.ProductQuantityQuantity
 ):
-    pass 
+    pass
 
     class Config:
         orm_mode = True
@@ -40,7 +40,7 @@ class SizeQuantityUpdate(
     _size_quatity_domain.SizeQuantitySold,
     _size_quatity_domain.ProductQuantityQuantity
 ):
-    pass 
+    pass
 
 
 class SizeQuantityUpdateQuantity(
@@ -48,4 +48,4 @@ class SizeQuantityUpdateQuantity(
     _size_quatity_domain.SizeQuantitySold,
     _size_quatity_domain.ProductQuantityQuantity
 ):
-    pass 
+    pass

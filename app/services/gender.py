@@ -1,4 +1,3 @@
-from sqlalchemy import false
 from app.models.schemas import gender as _gender_schemas
 from fastapi import HTTPException, status
 from app.db.repositories.gender.create_gender import create_gender
@@ -18,7 +17,7 @@ class GenderServices():
 
     def get_all_gender():
         respon = get_all_gender()
-        return respon 
+        return respon
 
     def delete_gender(id_gender: int):
         respon_gender = get_by_id_gender(id_gender)
@@ -36,21 +35,23 @@ class GenderServices():
 
 def get_gender_exception():
     credentials_exception = HTTPException(
-        detail= "Not Found",
+        detail="Not Found",
         status_code=status.HTTP_404_NOT_FOUND,
     )
     return credentials_exception
 
+
 def get_gender_done():
     credentials_exception = HTTPException(
-        detail= "Done",
+        detail="Done",
         status_code=status.HTTP_200_OK
     )
     return credentials_exception
 
+
 def get_gender_create_exception():
     credentials_exception = HTTPException(
-        detail= "Not Create",
+        detail="Not Create",
         status_code=status.HTTP_400_BAD_REQUEST,
     )
     return credentials_exception

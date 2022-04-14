@@ -1,11 +1,12 @@
-from sqlalchemy import (Boolean,
-                        Column, Float,
-                        Integer,
-                        String,
-                        ForeignKey,
-                        DateTime,
-                        UnicodeText,
-                        null)
+from sqlalchemy import (
+    Column, Float,
+    Integer,
+    String,
+    ForeignKey,
+    DateTime,
+    UnicodeText,
+    null
+)
 from app.db.database import Base
 from sqlalchemy.orm import relationship
 
@@ -21,10 +22,12 @@ class Info(Base):
     email = Column(String(250))
     address = Column(String(250))
 
-    user = relationship("User",
-                        back_populates="info",
-                        cascade="all, delete",
-                        passive_deletes=True)
+    user = relationship(
+        "User",
+        back_populates="info",
+        cascade="all, delete",
+        passive_deletes=True
+    )
 
 
 class Permission(Base):
@@ -33,10 +36,12 @@ class Permission(Base):
     id_permission = Column(Integer, primary_key=True)
     name = Column(String(250), unique=True)
 
-    user = relationship("User",
-                        back_populates="permission",
-                        cascade="all, delete",
-                        passive_deletes=True)
+    user = relationship(
+        "User",
+        back_populates="permission",
+        cascade="all, delete",
+        passive_deletes=True
+    )
 
     # def __init__(self, name):
     #     self.name = name
@@ -48,10 +53,12 @@ class NameServices(Base):
     id_name_services = Column(Integer, primary_key=True)
     name = Column(String(250), unique=True)
 
-    services = relationship("Services",
-                            back_populates="nameservices",
-                            cascade="all, delete",
-                            passive_deletes=True)
+    services = relationship(
+        "Services",
+        back_populates="nameservices",
+        cascade="all, delete",
+        passive_deletes=True
+    )
 
 
 class Services(Base):
@@ -69,10 +76,12 @@ class Services(Base):
 
     user = relationship("User", back_populates="services")
     nameservices = relationship("NameServices", back_populates="services")
-    userservices = relationship("UserServices",
-                                back_populates="services",
-                                cascade="all, delete",
-                                passive_deletes=True)
+    userservices = relationship(
+        "UserServices",
+        back_populates="services",
+        cascade="all, delete",
+        passive_deletes=True
+    )
 
 
 class UserServices(Base):
@@ -106,10 +115,12 @@ class Bill(Base):
                         foreign_keys=[id_user])
     verifier = relationship(
         "User", back_populates="bill_verification", foreign_keys=[id_verifier])
-    bill_details = relationship("BillDetails",
-                                back_populates="bill",
-                                cascade="all, delete",
-                                passive_deletes=True)
+    bill_details = relationship(
+        "BillDetails",
+        back_populates="bill",
+        cascade="all, delete",
+        passive_deletes=True
+    )
 
 
 class User(Base):
@@ -117,7 +128,8 @@ class User(Base):
 
     id_user = Column(Integer, primary_key=True, index=True)
     id_info = Column(Integer, ForeignKey('info.id_info', ondelete="CASCADE"))
-    id_permission = Column(Integer, ForeignKey('permission.id_permission', ondelete="CASCADE"))
+    id_permission = Column(Integer, ForeignKey(
+        'permission.id_permission', ondelete="CASCADE"))
 
     account = Column(String(250), unique=True)
     password = Column(String(250))
@@ -125,24 +137,32 @@ class User(Base):
     comments = relationship("Comments", back_populates="user")
     info = relationship("Info", back_populates="user")
     permission = relationship("Permission", back_populates="user")
-    bill_verification = relationship("Bill",
-                                     back_populates="verifier",
-                                     cascade="all, delete",
-                                     passive_deletes=True,
-                                     foreign_keys=[Bill.id_verifier])
-    bill_create = relationship("Bill",
-                               back_populates="user",
-                               cascade="all, delete",
-                               passive_deletes=True,
-                               foreign_keys=[Bill.id_user])
-    services = relationship("Services",
-                            back_populates="user",
-                            cascade="all, delete",
-                            passive_deletes=True)
-    userservices = relationship("UserServices",
-                                back_populates="user",
-                                cascade="all, delete",
-                                passive_deletes=True)
+    bill_verification = relationship(
+        "Bill",
+        back_populates="verifier",
+        cascade="all, delete",
+        passive_deletes=True,
+        foreign_keys=[Bill.id_verifier]
+    )
+    bill_create = relationship(
+        "Bill",
+        back_populates="user",
+        cascade="all, delete",
+        passive_deletes=True,
+        foreign_keys=[Bill.id_user]
+    )
+    services = relationship(
+        "Services",
+        back_populates="user",
+        cascade="all, delete",
+        passive_deletes=True
+    )
+    userservices = relationship(
+        "UserServices",
+        back_populates="user",
+        cascade="all, delete",
+        passive_deletes=True
+    )
 
 
 class Comments(Base):
@@ -154,11 +174,12 @@ class Comments(Base):
     Date = Column(DateTime)
 
     user = relationship("User", back_populates="comments")
-    rate_product = relationship("RateProduct",
-                            back_populates="comments",
-                            cascade="all, delete",
-                            passive_deletes=True)
-
+    rate_product = relationship(
+        "RateProduct",
+        back_populates="comments",
+        cascade="all, delete",
+        passive_deletes=True
+    )
 
 
 class Gender(Base):
@@ -218,18 +239,24 @@ class Product(Base):
 
     category = relationship("Category", back_populates="product")
     gender = relationship("Gender", back_populates="product")
-    bill_details = relationship("BillDetails",
-                                back_populates="product",
-                                cascade="all, delete",
-                                passive_deletes=True)
-    product_detail = relationship("ProductDetail",
-                                  back_populates="product",
-                                  cascade="all, delete",
-                                  passive_deletes=True)
-    rate_product = relationship("RateProduct",
-                                back_populates="product",
-                                cascade="all, delete",
-                                passive_deletes=True)
+    bill_details = relationship(
+        "BillDetails",
+        back_populates="product",
+        cascade="all, delete",
+        passive_deletes=True
+    )
+    product_detail = relationship(
+        "ProductDetail",
+        back_populates="product",
+        cascade="all, delete",
+        passive_deletes=True
+    )
+    rate_product = relationship(
+        "RateProduct",
+        back_populates="product",
+        cascade="all, delete",
+        passive_deletes=True
+    )
 
 
 class BillDetails(Base):
@@ -255,10 +282,12 @@ class Size(Base):
     id_size = Column(Integer, primary_key=True, index=True)
     size_number = Column(Float)
 
-    size_quantity = relationship("SizeQuantity",
-                                  back_populates="size",
-                                  cascade="all, delete",
-                                  passive_deletes=True)
+    size_quantity = relationship(
+        "SizeQuantity",
+        back_populates="size",
+        cascade="all, delete",
+        passive_deletes=True
+    )
 
 
 class Image(Base):
@@ -266,12 +295,11 @@ class Image(Base):
 
     id_image = Column(Integer, primary_key=True, index=True)
     id_product_detail = Column(Integer, ForeignKey(
-    'product_detail.id_product_detail', ondelete="CASCADE"))
+        'product_detail.id_product_detail', ondelete="CASCADE"))
 
     path = Column(String(250))
 
     product_detail = relationship("ProductDetail", back_populates="image")
-    
 
 
 class Color(Base):
@@ -280,11 +308,13 @@ class Color(Base):
     id_color = Column(Integer, primary_key=True, index=True)
     hex = Column(String(250))
 
-    product_detail = relationship("ProductDetail",
-                                  back_populates="color",
-                                  cascade="all, delete",
-                                  passive_deletes=True)
-                                  
+    product_detail = relationship(
+        "ProductDetail",
+        back_populates="color",
+        cascade="all, delete",
+        passive_deletes=True
+    )
+
 
 class ProductDetail(Base):
     __tablename__ = "product_detail"
@@ -294,7 +324,7 @@ class ProductDetail(Base):
         'product.id_product', ondelete="CASCADE"))
     id_color = Column(Integer, ForeignKey(
         'color.id_color', ondelete="CASCADE"))
-        
+
     # id_size = Column(Integer, ForeignKey('size.id_size', ondelete="CASCADE"))
 
     # quantity_sold = Column(Integer)
@@ -302,14 +332,18 @@ class ProductDetail(Base):
 
     product = relationship("Product", back_populates="product_detail")
     color = relationship("Color", back_populates="product_detail")
-    image = relationship("Image",
-                        back_populates="product_detail",
-                        cascade="all, delete",
-                        passive_deletes=True)
-    size_quantity = relationship("SizeQuantity",
-                        back_populates="product_detail",
-                        cascade="all, delete",
-                        passive_deletes=True)
+    image = relationship(
+        "Image",
+        back_populates="product_detail",
+        cascade="all, delete",
+        passive_deletes=True
+    )
+    size_quantity = relationship(
+        "SizeQuantity",
+        back_populates="product_detail",
+        cascade="all, delete",
+        passive_deletes=True
+    )
     # size = relationship("Size", back_populates="product_detail")
 
 
@@ -319,10 +353,12 @@ class Rate(Base):
     id_rate = Column(Integer, primary_key=True, index=True)
     number_star = Column(Integer)
 
-    rate_product = relationship("RateProduct",
-                                back_populates="rate",
-                                cascade="all, delete",
-                                passive_deletes=True)
+    rate_product = relationship(
+        "RateProduct",
+        back_populates="rate",
+        cascade="all, delete",
+        passive_deletes=True
+    )
 
 
 class RateProduct(Base):
@@ -344,12 +380,13 @@ class SizeQuantity(Base):
     __tablename__ = "size_quantity"
 
     id_size_quantity = Column(Integer, primary_key=True, index=True)
-    id_product_detail =  Column(Integer, ForeignKey(
+    id_product_detail = Column(Integer, ForeignKey(
         'product_detail.id_product_detail', ondelete="CASCADE"))
     id_size = Column(Integer, ForeignKey('size.id_size', ondelete="CASCADE"))
 
     quantity_sold = Column(Integer)
     quantity = Column(Integer)
 
-    product_detail = relationship("ProductDetail", back_populates="size_quantity")
+    product_detail = relationship(
+        "ProductDetail", back_populates="size_quantity")
     size = relationship("Size", back_populates="size_quantity")

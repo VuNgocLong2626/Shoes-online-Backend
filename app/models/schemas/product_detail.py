@@ -89,7 +89,7 @@ class SizeDetail(
         orm_mode = True
 
 
-class SizeUpdate(    
+class SizeUpdate(
     _base.SizeId,
     _product_detail_domain.SizeNumber
 ):
@@ -102,6 +102,7 @@ class ImageCreate(
 ):
     pass
 
+
 class ImageOutDB(
     _product_detail_domain.ImagePath
 ):
@@ -109,6 +110,7 @@ class ImageOutDB(
 
     class Config:
         orm_mode = True
+
 
 class ImageDetail(
     _base.ImageId,

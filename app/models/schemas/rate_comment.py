@@ -1,6 +1,6 @@
 from app.models.domain import (
-                                base as _base,
-                                comments as _comments_domain)
+    base as _base,
+    comments as _comments_domain)
 
 
 class CommentCreate(
@@ -23,7 +23,7 @@ class CommentDetail(
         orm_mode = True
 
 
-class CommentUpdate(    
+class CommentUpdate(
     _base.CommentsId,
     _base.UserId,
     _comments_domain.CommentsContent,
@@ -63,6 +63,6 @@ class CommentRateUpdate(
     _base.ProductId,
     _base.RateProductId,
     _base.RateId,
-    _base.CommentsId    
+    _base.CommentsId
 ):
     pass

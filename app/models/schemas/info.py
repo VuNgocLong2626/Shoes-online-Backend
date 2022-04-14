@@ -1,6 +1,7 @@
 from app.models.domain import (
-                                base as _base,
-                                info as _info_domain)
+    base as _base,
+    info as _info_domain)
+
 
 class InfoCreate(
     _info_domain.InfoFullName, _info_domain.InfoEmail,

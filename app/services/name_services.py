@@ -1,4 +1,3 @@
-from sqlalchemy import false
 from app.models.schemas import name_services as _nameser_schemas
 from fastapi import HTTPException, status
 from app.db.repositories.name_services.create_nameser import create_nameser
@@ -30,14 +29,15 @@ class NameServicesServices():
 
 def get_namser_exception():
     credentials_exception = HTTPException(
-        detail= "Not Found",
+        detail="Not Found",
         status_code=status.HTTP_404_NOT_FOUND,
     )
     return credentials_exception
 
+
 def get_namser_create_exception():
     credentials_exception = HTTPException(
-        detail= "Not Create",
+        detail="Not Create",
         status_code=status.HTTP_400_BAD_REQUEST,
     )
     return credentials_exception

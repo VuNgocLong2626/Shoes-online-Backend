@@ -1,11 +1,11 @@
 from app.models.domain import (
-                                base as _base,
-                                promotion as _promotion_domain)
+    base as _base,
+    promotion as _promotion_domain)
 
 
 class PromotionCreate(
     _promotion_domain.PromotionName,
-    _promotion_domain.PromotionDetail,       
+    _promotion_domain.PromotionDetail,
     _promotion_domain.PromotionReduction
 ):
     pass

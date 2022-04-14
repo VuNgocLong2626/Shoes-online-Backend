@@ -1,6 +1,6 @@
 from app.models.domain import (
-                                base as _base,
-                                gender as _gender_domain)
+    base as _base,
+    gender as _gender_domain)
 
 
 class GenderCreate(

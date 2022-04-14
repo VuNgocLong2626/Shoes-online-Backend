@@ -1,10 +1,6 @@
 from fastapi import UploadFile
 import os
-from app.utils import (
-    file_utils as _file_utils,
-)
 import shutil
-from ksuid import ksuid
 from datetime import datetime
 
 
@@ -25,8 +21,9 @@ def create_product_image(
     file_name = get_new_filename(file.filename)
     file_location = f"{save_file}/{file_name}"
     with open(file_location, "wb+") as file_object:
-        shutil.copyfileobj (file.file, file_object)
+        shutil.copyfileobj(file.file, file_object)
     return file_location
+
 
 def delete_product_image(
     product_id: int
@@ -38,9 +35,11 @@ def delete_product_image(
 def get_file_extension(filename: str):
     return filename.split(".")[-1]
 
+
 def generate_ksuid() -> str:
     kid = str(datetime.now()).replace(" ", "")
     return kid
+
 
 def get_new_filename(filename: str):
     ksuid = generate_ksuid()

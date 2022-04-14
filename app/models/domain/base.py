@@ -81,8 +81,10 @@ class RateProductId(BaseModel):
 class SizeQuantityId(BaseModel):
     id_size_quantity: int = Field(alias='id_size_quantity')
 
+
 class BillDetailId(BaseModel):
     id_bill_detail: int = Field(alias='id_bill_detail')
+
 
 class VerifierId(BaseModel):
     id_verifier: int = Field(None, alias='id_verifier')

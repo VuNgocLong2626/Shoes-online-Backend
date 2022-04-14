@@ -1,6 +1,6 @@
 from app.models.domain import (
-                                base as _base,
-                                bill_detail as _bill_detail_domain)
+    base as _base,
+    bill_detail as _bill_detail_domain)
 
 
 class BillDetailCreate(
@@ -9,7 +9,7 @@ class BillDetailCreate(
     _bill_detail_domain.BillDetailQuantity,
     _bill_detail_domain.BillDetailCurrentPrice,
     _bill_detail_domain.BillDetailIdProductDetail,
-    _bill_detail_domain.BillDetailIdSizeQuantity    
+    _bill_detail_domain.BillDetailIdSizeQuantity
 ):
     pass
 
@@ -21,7 +21,7 @@ class BillDetailDetail(
     _bill_detail_domain.BillDetailQuantity,
     _bill_detail_domain.BillDetailCurrentPrice,
     _bill_detail_domain.BillDetailIdProductDetail,
-    _bill_detail_domain.BillDetailIdSizeQuantity    
+    _bill_detail_domain.BillDetailIdSizeQuantity
 ):
 
     class Config:
@@ -35,7 +35,7 @@ class BillDetailUpdate(
     _bill_detail_domain.BillDetailQuantity,
     _bill_detail_domain.BillDetailCurrentPrice,
     _bill_detail_domain.BillDetailIdProductDetail,
-    _bill_detail_domain.BillDetailIdSizeQuantity    
+    _bill_detail_domain.BillDetailIdSizeQuantity
 ):
     pass
 
@@ -45,6 +45,6 @@ class BillDetailInDB(
     _bill_detail_domain.BillDetailQuantity,
     _bill_detail_domain.BillDetailCurrentPrice,
     _bill_detail_domain.BillDetailIdProductDetail,
-    _bill_detail_domain.BillDetailIdSizeQuantity    
+    _bill_detail_domain.BillDetailIdSizeQuantity
 ):
     pass

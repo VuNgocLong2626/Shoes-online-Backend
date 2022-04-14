@@ -6,6 +6,5 @@ class CommentsContent(BaseModel):
     Content: str = Field(alias='Content')
 
 
-
 class CommentsDate(BaseModel):
     Date: date = Field(alias='Date')

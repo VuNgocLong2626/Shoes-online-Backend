@@ -1,7 +1,4 @@
 import os
-import shutil
-from typing import List
-from ksuid import ksuid
 from datetime import datetime
 
 
@@ -18,15 +15,17 @@ def write_file(
     #     f.write(data)
     # return save_to
 
+
 def get_file_extension(filename: str):
     return filename.split(".")[-1]
+
 
 def generate_ksuid():
     kid = str(datetime.now())
     return kid
 
+
 def get_new_filename(filename: str):
     ksuid = generate_ksuid()
     file_extension = get_file_extension(filename)
     return f'{ksuid}.{file_extension}'
-

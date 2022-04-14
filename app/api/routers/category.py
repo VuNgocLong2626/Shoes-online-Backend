@@ -1,5 +1,4 @@
-from fastapi import APIRouter, Response, status, HTTPException
-from sqlalchemy import null
+from fastapi import APIRouter
 from typing import List, Optional
 from app.services.category import CategoryServices
 from app.models.schemas import category as _category_schemas
@@ -17,6 +16,7 @@ async def create_category(category_in: _category_schemas.CategoryCreate):
     respon = CategoryServices.create_category(category_in)
     return respon
 
+
 @router.get("/", response_model=List[_category_schemas.CategoryDetail])
 async def get_all(name_category: Optional[str] = None):
     if name_category is None:
@@ -26,10 +26,12 @@ async def get_all(name_category: Optional[str] = None):
         respon = CategoryServices.get_by_name(name_category)
         return respon
 
+
 @router.put("/")
 async def update_category(category_in: _category_schemas.CategoryUpdate):
     respon = CategoryServices.update_category(category_in)
     return respon
+
 
 @router.delete("/{id_category}")
 async def delete_category(id_category: int):

@@ -1,6 +1,6 @@
 from app.models.domain import (
-                                base as _base,
-                                category as _category_domain)
+    base as _base,
+    category as _category_domain)
 
 
 class CategoryCreate(

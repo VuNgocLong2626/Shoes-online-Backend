@@ -1,5 +1,3 @@
-from urllib import response
-from sqlalchemy import false
 from app.models.schemas import (
     user as _user_schemas,
     info as _info_schemas
@@ -7,9 +5,10 @@ from app.models.schemas import (
 from fastapi.security import OAuth2PasswordRequestForm
 from fastapi import HTTPException, status, Depends
 from app.services.athu import (
-                                get_password_hash, 
-                                create_access_token,
-                                verify_password)
+    get_password_hash,
+    create_access_token,
+    verify_password
+)
 
 from app.db.repositories.user.create_user import create_user
 from app.db.repositories.user.get_user import get_user
@@ -38,7 +37,7 @@ class UserServices():
             user_out = create_user(new_user)
             if user_out is None:
                 raise get_user_create_exception()
-                
+
             user_token = _usertoken_schemas(**{
                 "id_user": user_out.id_user,
                 "id_info": user_out.id_info,
@@ -47,7 +46,7 @@ class UserServices():
             })
             token = create_access_token(user_token)
             return token
-        except:
+        except Exception:
             raise get_user_exception()
 
     def get_user(user_in: _user_schemas.UserLogin):
@@ -63,11 +62,11 @@ class UserServices():
             raise get_user_exception()
 
         user_token = _usertoken_schemas(**{
-                "id_user": respon_user.id_user,
-                "id_info": respon_user.id_info,
-                "id_permission": respon_user.id_permission,
-                "account": respon_user.account
-            })
+            "id_user": respon_user.id_user,
+            "id_info": respon_user.id_info,
+            "id_permission": respon_user.id_permission,
+            "account": respon_user.account
+        })
         token = create_access_token(user_token)
         return token
 
@@ -75,20 +74,26 @@ class UserServices():
         response = get_by_id_info(user_in.id_info)
         return response
 
-    def update_info_user(user_in: _user_schemas.UserToken, info_in: _info_schemas.InfoUpdate):
+    def update_info_user(
+        user_in: _user_schemas.UserToken,
+        info_in: _info_schemas.InfoUpdate
+    ):
         respon = update_info(user_in, info_in)
         if respon is None:
             raise get_user_exception()
         else:
             return respon
 
-    def update_password(user_in: _user_schemas.UserToken, passw: _user_schemas.UserChangePassword):
+    def update_password(
+        user_in: _user_schemas.UserToken,
+        passw: _user_schemas.UserChangePassword
+    ):
         hash_password = get_password_hash(passw.password)
         respon = update_password(user_in, hash_password)
         if respon is None:
             raise get_user_exception()
         raise get_user_done()
-    
+
     def login_form(form_data: OAuth2PasswordRequestForm = Depends()):
         user_in = _user_schemas.UserLogin(**{
             "account": form_data.username,
@@ -107,31 +112,34 @@ class UserServices():
             raise get_user_exception()
 
         user_token = _usertoken_schemas(**{
-                "id_user": respon_user.id_user,
-                "id_info": respon_user.id_info,
-                "id_permission": respon_user.id_permission,
-                "account": respon_user.account
-            })
+            "id_user": respon_user.id_user,
+            "id_info": respon_user.id_info,
+            "id_permission": respon_user.id_permission,
+            "account": respon_user.account
+        })
         token = create_access_token(user_token)
         return token
 
+
 def get_user_exception():
     credentials_exception = HTTPException(
-        detail= "Not Found",
+        detail="Not Found",
         status_code=status.HTTP_404_NOT_FOUND,
     )
     return credentials_exception
 
+
 def get_user_done():
     credentials_exception = HTTPException(
-        detail= "Done",
+        detail="Done",
         status_code=status.HTTP_200_OK
     )
     return credentials_exception
 
+
 def get_user_create_exception():
     credentials_exception = HTTPException(
-        detail= "Not Create",
+        detail="Not Create",
         status_code=status.HTTP_404_NOT_FOUND,
     )
     return credentials_exception

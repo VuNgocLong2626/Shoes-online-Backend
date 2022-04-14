@@ -1,5 +1,3 @@
-from urllib import response
-from sqlalchemy import false
 from app.models.schemas import permission as _permission_schemas
 from app.db.repositories.permission.create_permission import create_permission
 from app.db.repositories.permission.get_all import get_all
@@ -24,7 +22,7 @@ class PermissionService():
         try:
             respon = delete_permission(id)
             return respon
-        except:
+        except Exception:
             raise get_user_exception()
 
     def update_permission(permission_in: _permission_schemas.PermissionUpdate):
@@ -34,14 +32,15 @@ class PermissionService():
 
 def get_user_exception():
     credentials_exception = HTTPException(
-        detail= "Not Found",
+        detail="Not Found",
         status_code=status.HTTP_404_NOT_FOUND,
     )
     return credentials_exception
 
+
 def get_user_create_exception():
     credentials_exception = HTTPException(
-        detail= "Not Create",
+        detail="Not Create",
         status_code=status.HTTP_400_BAD_REQUEST,
     )
     return credentials_exception

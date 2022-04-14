@@ -11,5 +11,3 @@ class SizeNumber(BaseModel):
 
 class ColorHex(BaseModel):
     hex: str = Field(alias='hex')
-
-
