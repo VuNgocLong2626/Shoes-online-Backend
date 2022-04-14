@@ -81,6 +81,11 @@ async def get_all_product(id_gender: Optional[int] = None):
     respon = ProductServices.get_all_product(id_gender)
     return respon
 
+@router.get("/user-all-product")
+async def get_all_product(id_gender: Optional[int] = None):
+    respon = ProductServices.get_all_product_user(id_gender)
+    return respon
+
 @router.post("/filter-product")
 async def get_filter_product(filter_in: _product_schemas.ProductFillter):
     respon = ProductServices.get_filter_product(filter_in)

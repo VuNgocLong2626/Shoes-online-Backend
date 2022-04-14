@@ -34,6 +34,8 @@ from app.db.repositories.product.get_by_in_id_color_and_gender import get_by_in_
 from app.db.repositories.product.get_by_in_id_category_and_gender import get_by_in_id_category_and_gender
 from app.db.repositories.product.get_by_in_id_category_and_color_and_gender import get_by_in_id_category_and_color_and_gender
 from app.db.repositories.product.get_product_by_id_poduct_and_detail import get_product_by_id_poduct_and_detail
+from app.db.repositories.product_detail.get_first_by_id_product import get_first_by_id_product
+from app.db.repositories.size_quantity.get_first_size_by_id_product import get_first_size_by_id_product
 
 
 class ProductServices():
@@ -142,6 +144,11 @@ class ProductServices():
         respon = get_all_main(product_all)
         return respon
 
+    def get_all_product_user(id_gender: Optional[int] = None):
+        product_all = get_all_product_basic(id_gender)
+        respon = get_all_main_user(product_all)
+        return respon
+
     def get_filter_product(fillter_in: _product_schemas.ProductFillter):
         if fillter_in.id_gender == 0:
             if (not fillter_in.list_id_category is None):
@@ -238,6 +245,32 @@ def get_all_main(product_all, list_id_color: Optional[List[int]] = None):
         product.update({"discount": discount})
         product.update({"reduction": reduction})
         product_detail = get_list_by_id_product_detail(product.get("id_product"))
+        product.update({"list_color": product_detail})
+        respon.append(product)
+    return respon
+
+def get_all_main_user(product_all, list_id_color: Optional[List[int]] = None):
+    respon = []
+    for products in product_all:
+        product = {**products.__dict__}
+
+        check_product = get_first_by_id_product(product.get("id_product"))
+        if check_product is None:
+            continue
+        check_size = get_first_size_by_id_product(check_product.id_product_detail)
+        if check_size is None:
+            continue
+
+        reduction = get_discount(products.id_category)
+        if reduction is None: 
+            reduction = 0 
+        else: 
+            reduction = reduction.reduction
+        
+        product_detail = get_list_by_id_product_detail(product.get("id_product"))
+        discount = products.money * (1 - reduction/100)
+        product.update({"discount": discount})
+        product.update({"reduction": reduction})
         product.update({"list_color": product_detail})
         respon.append(product)
     return respon
