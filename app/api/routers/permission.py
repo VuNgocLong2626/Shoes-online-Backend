@@ -30,7 +30,7 @@ async def get_all_permission():
 
 @router.delete("/{id_permission}")
 async def delete_permission(id_permission: int):
-    respon = PermissionService.delete_permission(id_permission)
+    _ = PermissionService.delete_permission(id_permission)
     return HTTPException(
         status_code=status.HTTP_200_OK,
         detail="Successfull"

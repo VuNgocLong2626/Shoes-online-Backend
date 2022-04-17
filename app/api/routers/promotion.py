@@ -1,5 +1,5 @@
 from fastapi import APIRouter
-from typing import List, Optional
+from typing import Optional
 from app.services.promotion import PromotionServices
 from app.models.schemas import promotion as _promotion_schemas
 
@@ -37,6 +37,13 @@ async def update_promotion(promotion_in: _promotion_schemas.PromotionUpdate):
 async def delete_promotion(id_promotion: int):
     respon = PromotionServices.delete_promotion(id_promotion)
     return respon
+
+
+@router.delete("/update-category/{id_promotion}")
+async def delete_update_category(id_promotion: int):
+    respon = PromotionServices.delete_update_category(id_promotion)
+    return respon
+
 
 # @router.get("/")
 # async def get_by_name(name_promotion: str):

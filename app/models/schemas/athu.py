@@ -1,6 +1,6 @@
 from pydantic import BaseModel
 from sqlalchemy import true
-from app.models.domain import(
+from app.models.domain import (
     user as _user_domain,
     base as _base,
     info as _info_domain,

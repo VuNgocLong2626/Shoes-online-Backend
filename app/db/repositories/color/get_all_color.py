@@ -1,4 +1,3 @@
-from sqlalchemy import false
 from app.db.database import SessionLocal
 from app.db.tables import Color
 

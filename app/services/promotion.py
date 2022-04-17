@@ -7,6 +7,8 @@ from app.db.repositories.promotion.get_by_id_promotion \
 from app.db.repositories.promotion.update_promotion import update_promotion
 from app.db.repositories.promotion.delete_promotion import delete_promotion
 from app.db.repositories.promotion.get_by_name import get_by_name
+from app.db.repositories.category.update_category_by_id_promition \
+    import update_category_by_id_promition
 
 
 class PromotionServices():
@@ -40,6 +42,14 @@ class PromotionServices():
     def get_by_name(name: str):
         respon = get_by_name(name)
         return respon
+
+    def delete_update_category(id_promotion: int):
+        respon_promotion = get_by_id_promotion(id_promotion)
+        if respon_promotion is None:
+            raise get_promotion_exception()
+        _ = update_category_by_id_promition(id_promotion)
+        delete_promotion(id_promotion)
+        raise get_promotion_done()
 
 
 def get_promotion_exception():

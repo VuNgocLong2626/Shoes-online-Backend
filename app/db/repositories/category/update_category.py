@@ -1,4 +1,3 @@
-from sqlalchemy import false
 from app.db.database import SessionLocal
 from app.models.schemas.category import CategoryUpdate
 from app.db.tables import Category
@@ -17,5 +16,5 @@ def update_category(category_in: CategoryUpdate):
         db.commit()
         db.close()
         return category_in
-    except:
+    except Exception:
         return None

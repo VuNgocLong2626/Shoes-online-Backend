@@ -1,6 +1,6 @@
-from app.models.domain import (
-    base as _base,
-    user as _user_domain)
+# from app.models.domain import (
+#     base as _base,
+#     user as _user_domain)
 from app.models.schemas import athu as _user_shemas
 
 
