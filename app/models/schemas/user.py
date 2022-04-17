@@ -1,8 +1,8 @@
 from app.models.domain import (
-                                base as _base,
-                                user as _user_domain)
+    base as _base,
+    user as _user_domain)
 from app.models.schemas import info as _info_shemas
-from typing import Dict
+from pydantic import Field, BaseModel
 
 
 class UserCreate(
@@ -39,7 +39,7 @@ class UserInDB(
     _base.PermissionId,
     _user_domain.UserAccount,
     _user_domain.UserPassword
-    ):
+):
     pass
 
     class Config:
@@ -55,7 +55,7 @@ class UserToken(
     pass
 
 
-class UserLogin(    
+class UserLogin(
     _user_domain.UserAccount,
     _user_domain.UserPassword
 ):
@@ -63,3 +63,8 @@ class UserLogin(
 
     class Config:
         orm_mode = True
+
+
+class UserCheckPassWord(BaseModel):
+    password: str = Field(alias='password')
+    password_old: str = Field(alias='password_old')

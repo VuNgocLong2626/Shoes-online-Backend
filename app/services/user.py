@@ -120,6 +120,26 @@ class UserServices():
         token = create_access_token(user_token)
         return token
 
+    def change_password(
+        user_in: _user_schemas.UserToken,
+        pass_in: _user_schemas.UserCheckPassWord
+    ):
+
+        respon_user = get_user(user_in)
+        if not respon_user:
+            raise get_user_exception()
+        athu_password = verify_password(
+            pass_in.password_old,
+            respon_user.password
+        )
+        if not athu_password:
+            raise get_user_change_exception()
+        hash_password = get_password_hash(pass_in.password)
+        respon = update_password(user_in, hash_password)
+        if respon is None:
+            raise get_user_exception()
+        raise get_user_done()
+        
 
 def get_user_exception():
     credentials_exception = HTTPException(
@@ -140,6 +160,14 @@ def get_user_done():
 def get_user_create_exception():
     credentials_exception = HTTPException(
         detail="Not Create",
+        status_code=status.HTTP_404_NOT_FOUND,
+    )
+    return credentials_exception
+
+
+def get_user_change_exception():
+    credentials_exception = HTTPException(
+        detail="Password is wrong",
         status_code=status.HTTP_404_NOT_FOUND,
     )
     return credentials_exception

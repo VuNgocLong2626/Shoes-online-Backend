@@ -55,8 +55,8 @@ async def update_info_user(
 
 @router.put("/change-password/")
 def update_password(
-    passw: _user_schemas.UserChangePassword,
+    passw: _user_schemas.UserCheckPassWord,
     user: dict = Depends(get_current_user)
 ):
-    respon = UserServices.update_password(user, passw)
+    respon = UserServices.change_password(user, passw)
     return respon
