@@ -18,3 +18,7 @@ pandas
 xlrd
 openpyxl
 odfpy
+# itsdangerous
+# authlib
+# google-auth-oauthlib
+# httpx

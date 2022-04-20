@@ -131,3 +131,6 @@ dmypy.json
 # media
 media/
 .vscode/
+
+.env.sample
+test3.py

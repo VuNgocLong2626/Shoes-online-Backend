@@ -5,19 +5,23 @@ from app.models.schemas import (
 from fastapi import HTTPException, status
 
 from app.db.repositories.services.create_services import create_services
-from app.db.repositories.services.get_id_user_join_user_services import get_by_id_user_join_user_services
-from app.db.repositories.services.get_chua_join_user_services import get_by_chua_join_user_services
+from app.db.repositories.services.get_id_user_join_user_services \
+    import get_by_id_user_join_user_services
+from app.db.repositories.services.get_chua_join_user_services \
+    import get_by_chua_join_user_services
 from app.db.repositories.services.update_services import update_services
-from app.db.repositories.services.get_notchua_join_user_services import get_by_notchua_join_user_services
+from app.db.repositories.services.get_notchua_join_user_services \
+    import get_by_notchua_join_user_services
 
-from app.db.repositories.user_services.create_user_services import create_user_services
+from app.db.repositories.user_services.create_user_services \
+    import create_user_services
 
 
 class ServicesServices():
     def create_services(_in: _user_services_schemas.ServicesInDB):
         services = _user_services_schemas.ServicesCreate(**_in.dict())
         respon_services = create_services(services)
-        if respon_services is None: 
+        if respon_services is None:
             raise get_services_create_exception()
 
         user_services = _user_services_schemas.UserServicesCreate(**{
@@ -31,14 +35,17 @@ class ServicesServices():
         try:
             respon = get_by_id_user_join_user_services(id_user)
             return respon
-        except:
+        except Exception:
             raise get_services_exception()
 
     def get_unconfimred_all():
         respon = get_by_chua_join_user_services()
         return respon
 
-    def update_services(_in: _user_services_schemas.ServicesUpdate, user_in: _user_schemas.UserToken):
+    def update_services(
+        _in: _user_services_schemas.ServicesUpdate,
+        user_in: _user_schemas.UserToken
+    ):
         respon = update_services(_in, user_in)
         return respon
 
@@ -49,21 +56,23 @@ class ServicesServices():
 
 def get_services_exception():
     credentials_exception = HTTPException(
-        detail= "Not Found",
+        detail="Not Found",
         status_code=status.HTTP_404_NOT_FOUND,
     )
     return credentials_exception
 
+
 def get_services_done():
     credentials_exception = HTTPException(
-        detail= "Done",
+        detail="Done",
         status_code=status.HTTP_200_OK
     )
     return credentials_exception
 
+
 def get_services_create_exception():
     credentials_exception = HTTPException(
-        detail= "Not Create",
+        detail="Not Create",
         status_code=status.HTTP_400_BAD_REQUEST,
     )
     return credentials_exception

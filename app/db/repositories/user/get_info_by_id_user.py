@@ -1,6 +1,4 @@
-from sqlalchemy import false
 from app.db.database import SessionLocal
-from app.models.schemas.user import UserLogin
 from app.db.tables import User, Info
 
 

@@ -29,6 +29,8 @@ from app.db.repositories.size_quantity.update_quantity_buy \
     import update_quantity_buy
 from app.db.repositories.product.get_by_id_product \
     import get_by_id_product
+from app.db.repositories.user.get_info_by_id_user \
+    import get_info_by_id_user
 
 
 class BillServices():
@@ -114,7 +116,7 @@ class BillServices():
 
     def get_bill_all(id_bill: Optional[int] = None):
         if id_bill is None:
-            bill_all = get_bill_all()
+            bill_all = get_all_bill_admin()
             return bill_all
         bill = get_by_id_bill(id_bill)
         if bill is None:
@@ -144,6 +146,28 @@ class BillServices():
         respon = {**bill.__dict__}
         respon.update({"list_product_details": list_bill_detail})
         return respon
+
+
+def get_all_bill_admin():
+    bill_all = get_bill_all()
+    respon = []
+    for bill in bill_all:
+        _bill = {**bill.__dict__}
+        info_user = get_info_by_id_user(_bill.get("id_user"))
+        id_verifier = _bill.get("id_verifier")
+        if id_verifier:
+            info_admin = get_info_by_id_user(_bill.get("id_verifier"))
+            _bill.update({
+                "name_user": info_user.full_name,
+                "name_admin": info_admin.full_name
+            })
+        else:
+            _bill.update({
+                "name_user": info_user.full_name,
+                "name_admin": "null"
+            })
+        respon.append(_bill)
+    return respon
 
 
 def get_first_image_by_id_product(id_product_detail: int):

@@ -139,7 +139,7 @@ class UserServices():
         if respon is None:
             raise get_user_exception()
         raise get_user_done()
-        
+
 
 def get_user_exception():
     credentials_exception = HTTPException(
