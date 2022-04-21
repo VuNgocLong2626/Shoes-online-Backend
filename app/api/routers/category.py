@@ -17,7 +17,7 @@ async def create_category(category_in: _category_schemas.CategoryCreate):
     return respon
 
 
-@router.get("/", response_model=List[_category_schemas.CategoryDetail])
+@router.get("/")
 async def get_all(name_category: Optional[str] = None):
     if name_category is None:
         respon = CategoryServices.get_all_category()

@@ -6,6 +6,8 @@ from app.db.repositories.category.get_by_id_category import get_by_id_category
 from app.db.repositories.category.delete_category import delete_category
 from app.db.repositories.category.update_category import update_category
 from app.db.repositories.category.get_by_name import get_by_name_category
+from app.db.repositories.promotion.get_by_id_promotion \
+    import get_by_id_promotion
 
 
 class CategoryServices():
@@ -17,7 +19,18 @@ class CategoryServices():
         return respon
 
     def get_all_category():
-        respon = get_all_category()
+        all_category = get_all_category()
+        respon = []
+        for category in all_category:
+            _category = {**category.__dict__}
+            id_promotion = _category.get("id_promotion")
+            if id_promotion:
+                _promotion = get_by_id_promotion(id_promotion)
+                _category.update({"name_promotion": _promotion.name})
+                respon.append(_category)
+            else:
+                _category.update({"name_promotion": "null"})
+                respon.append(_category)
         return respon
 
     def delete_category(id_category: int):
@@ -34,7 +47,18 @@ class CategoryServices():
         return respon
 
     def get_by_name(name: str):
-        respon = get_by_name_category(name)
+        all_category = get_by_name_category(name)
+        respon = []
+        for category in all_category:
+            _category = {**category.__dict__}
+            id_promotion = _category.get("id_promotion")
+            if id_promotion:
+                _promotion = get_by_id_promotion(id_promotion)
+                _category.update({"name_promotion": _promotion.name})
+                respon.append(_category)
+            else:
+                _category.update({"name_promotion": "null"})
+                respon.append(_category)
         return respon
 
 
