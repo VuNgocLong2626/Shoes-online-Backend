@@ -103,7 +103,7 @@ async def create_order_paypal(
         return HTMLResponse(data)
     if order_id and money:
         respon = pay(money, order_id)
-        webbrowser.open_new(respon)
+        # webbrowser.open_new(respon)
         return respon
     # webbrowser.close()
     # print(order_id)
@@ -201,5 +201,6 @@ async def auth(request: Request):
         else:
             respon = "Ahihi"
             respon = UserServices.create_user(_user_create)
-
-    return respon
+    headers = {'Authorization': respon}
+    return RedirectResponse(url='http://localhost:3000/', headers=headers)
+    # return respon
