@@ -1,4 +1,4 @@
-
+import requests
 from tabnanny import check
 from fastapi import APIRouter
 from paypalcheckoutsdk.core import PayPalHttpClient, SandboxEnvironment
@@ -8,19 +8,26 @@ from app.utils.payment import pay
 from authlib.integrations.starlette_client import OAuth, OAuthError
 from starlette.config import Config
 from starlette.requests import Request
-# from starlette.responses import HTMLResponse, RedirectResponse
+from starlette.responses import HTMLResponse, RedirectResponse
 from app.services.user import UserServices
 from app.models.schemas import (
     user as _user_schemas,
     info as _info_schemas
 )
 from app.db.repositories.user.get_user_by_account import get_user_by_account
+from typing import Optional
+import json
+import webbrowser
+import sys
 
 router = router = APIRouter(
     prefix="",
     tags=["Pay Ment"],
     responses={404: {"description": "Not found"}}
 )
+
+
+s = {}
 
 config = Config('.env')
 oauth = OAuth(config)
@@ -70,13 +77,40 @@ client = PayPalHttpClient(environment)
 #         print(IOError)
 
 
-@router.post("/create-order")
+@router.get("/create-order")
 async def create_order_paypal(
-    money: int,
-    order_id: int
+    request: Request,
+    money: Optional[int] = None,
+    order_id: Optional[int] = None,
+    close: Optional[int] = None
 ):
-    respon = pay(money, order_id)
-    return respon
+    user = request.session.get(f'{order_id}')
+    # print(order_id)
+    # data = json.dumps(user)
+    # print(data)
+    # return HTMLResponse(data)
+    data = json.dumps(s.get(f'{order_id}'))
+    # if user:
+    #     print("ahihi")
+    #     data = json.dumps(user)
+    #     print(data)
+    #     webbrowser.close()
+    #     return HTMLResponse(data)
+    if close == 0:
+        return HTMLResponse('<button type="button" onclick="javascript:window.close()">Discard</button>')
+    if data != 'null':
+        print(data)
+        return HTMLResponse(data)
+    if order_id and money:
+        respon = pay(money, order_id)
+        webbrowser.open_new(respon)
+        return respon
+    # webbrowser.close()
+    # print(order_id)
+    # data = json.dumps(user)
+    # print(data)
+    # data = json.dumps(s.get(f'{order_id}'))
+    return HTMLResponse(data)
 
 
 @router.get("/payment_return")
@@ -92,7 +126,8 @@ async def payment_return(
     vnp_TransactionNo: int,
     vnp_TransactionStatus: int,
     vnp_TxnRef: int,
-    vnp_SecureHash: str
+    vnp_SecureHash: str,
+    request: Request
 ):
     respon = {
         "vnp_Amount": vnp_Amount,
@@ -106,9 +141,17 @@ async def payment_return(
         "vnp_TransactionNo": vnp_TransactionNo,
         "vnp_TransactionStatus": vnp_TransactionStatus,
         "vnp_TxnRef": vnp_TxnRef,
-        "vnp_SecureHash": vnp_SecureHash
+        "vnp_SecureHash": vnp_SecureHash,
+        "url": request.url._url
     }
-    return respon
+    request.session[f'{vnp_TxnRef}'] = respon
+    # user = request.session.get(f'{vnp_TxnRef}')
+    s.update({f'{vnp_TxnRef}': respon})
+    print(s.get(f'{vnp_TxnRef}'))
+    # print(vnp_TxnRef)
+    # data = json.dumps(user)
+    # print(data)
+    return RedirectResponse(url=f'http://localhost:3000/purchase/id_order={vnp_TxnRef}')
 
 
 @router.get('/google-link')
