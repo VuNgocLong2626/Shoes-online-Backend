@@ -22,3 +22,4 @@ odfpy
 # authlib
 # google-auth-oauthlib
 # httpx
+selenium
