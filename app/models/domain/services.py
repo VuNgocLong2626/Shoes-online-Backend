@@ -11,6 +11,6 @@ class ServicesCreate(BaseModel):
 
 
 class ServicesStatus(BaseModel):
-    status: str = Field(min_length=2,
+    status: str = Field(min_length=1,
                         max_length=250,
                         alias='status')

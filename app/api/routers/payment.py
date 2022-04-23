@@ -152,7 +152,7 @@ async def payment_return(
     # data = json.dumps(user)
     # print(data)
     return RedirectResponse(url=f'http://localhost:3000/purchase/id_order={vnp_TxnRef}')
-
+    # return respon
 
 @router.get('/google-link')
 async def homepage(request: Request):

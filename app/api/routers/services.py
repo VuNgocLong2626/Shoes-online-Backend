@@ -1,7 +1,8 @@
 from fastapi import APIRouter, Depends
 from app.services.services import ServicesServices
 from app.models.schemas import uesr_services as _user_services_schemas
-from app.services.athu import get_current_user
+from app.services.athu import get_current_admin
+from typing import Optional
 
 
 router = APIRouter(
@@ -35,10 +36,16 @@ async def get_confimred_all():
     return respon
 
 
+@router.get("/get-all-by-condition/")
+async def get_all_by_condition(condition: int):
+    respon = ServicesServices.get_all_by_condition(condition)
+    return respon
+
+
 @router.put("/", response_model=_user_services_schemas.ServicesUpdate)
 async def update_services(
     _in: _user_services_schemas.ServicesUpdate,
-    user_in: dict = Depends(get_current_user)
+    user_in: dict = Depends(get_current_admin)
 ):
     respon = ServicesServices.update_services(_in, user_in)
     return respon
