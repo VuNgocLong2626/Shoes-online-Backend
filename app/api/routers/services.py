@@ -1,7 +1,7 @@
 from fastapi import APIRouter, Depends
 from app.services.services import ServicesServices
 from app.models.schemas import uesr_services as _user_services_schemas
-from app.services.athu import get_current_admin
+from app.services.athu import get_current_admin, get_current_user
 from typing import Optional
 
 
@@ -48,4 +48,12 @@ async def update_services(
     user_in: dict = Depends(get_current_admin)
 ):
     respon = ServicesServices.update_services(_in, user_in)
+    return respon
+
+
+@router.get("/get-all-service-user/")
+async def get_all_service_user(
+    user_in: dict = Depends(get_current_user)
+):
+    respon = ServicesServices.get_all_re(user_in)
     return respon

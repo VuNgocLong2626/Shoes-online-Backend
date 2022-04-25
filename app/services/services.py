@@ -21,6 +21,8 @@ from app.db.repositories.user.get_info_by_id_user\
     import get_info_by_id_user
 from app.db.repositories.name_services.get_all_nameser_by_id\
     import get_all_nameser_by_id
+from app.models.schemas.user import UserToken as _usertoken_schemas
+from app.db.repositories.user_services.get_all_service_by_id import get_all_service_by_id
 
 
 class ServicesServices():
@@ -90,6 +92,19 @@ class ServicesServices():
 
         return respon
 
+    def get_all_re(user_in: _usertoken_schemas):
+        all_service = get_all_service_by_id(user_in.id_user)
+        respon = []
+        for service in all_service:
+            name_service = get_all_nameser_by_id(service.Services.id_name_services)
+            sv = {
+                "booking_date": service.Services.booking_date,
+                "date_create": service.Services.date_create,
+                "status": service.Services.status,
+                "name_service": name_service.name
+            }
+            respon.append(sv)
+        return respon
 
 def get_services_exception():
     credentials_exception = HTTPException(
