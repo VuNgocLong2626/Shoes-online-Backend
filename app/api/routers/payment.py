@@ -202,5 +202,5 @@ async def auth(request: Request):
             respon = "Ahihi"
             respon = UserServices.create_user(_user_create)
     headers = {'Authorization': respon}
-    return RedirectResponse(url='http://localhost:3000/', headers=headers)
+    return RedirectResponse(url=f'http://localhost:3000/token={respon}')
     # return respon
