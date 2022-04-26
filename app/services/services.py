@@ -47,7 +47,34 @@ class ServicesServices():
             raise get_services_exception()
 
     def get_unconfimred_all():
-        respon = get_by_chua_join_user_services()
+        uesr_service_all = get_by_chua_join_user_services()
+        respon = []
+        for uesr_service in uesr_service_all:
+            service = {
+                "id_services": uesr_service.Services.id_services,
+                "id_name_services": uesr_service.Services.id_name_services,
+                "date_create": uesr_service.Services.date_create,
+                "booking_date": uesr_service.Services.booking_date,
+                "status": uesr_service.Services.status,
+                "id_verifier": uesr_service.Services.id_verifier
+            }
+            name_service = get_all_nameser_by_id(
+                uesr_service.Services.id_name_services
+            )
+            name_user = get_info_by_id_user(uesr_service.UserServices.id_user)
+            service.update({
+                "name_service": name_service.name,
+                "name_user": name_user.full_name
+            })
+            if uesr_service.Services.id_verifier:
+                name_verifier = get_info_by_id_user(
+                    uesr_service.Services.id_verifier
+                )
+                service.update({"name_verifier": name_verifier.full_name})
+            else:
+                service.update({"name_verifier": "null"})
+            respon.append(service)
+
         return respon
 
     def update_services(
@@ -58,7 +85,34 @@ class ServicesServices():
         return respon
 
     def get_confimred_all():
-        respon = get_by_notchua_join_user_services()
+        uesr_service_all = get_by_notchua_join_user_services()
+        respon = []
+        for uesr_service in uesr_service_all:
+            service = {
+                "id_services": uesr_service.Services.id_services,
+                "id_name_services": uesr_service.Services.id_name_services,
+                "date_create": uesr_service.Services.date_create,
+                "booking_date": uesr_service.Services.booking_date,
+                "status": uesr_service.Services.status,
+                "id_verifier": uesr_service.Services.id_verifier
+            }
+            name_service = get_all_nameser_by_id(
+                uesr_service.Services.id_name_services
+            )
+            name_user = get_info_by_id_user(uesr_service.UserServices.id_user)
+            service.update({
+                "name_service": name_service.name,
+                "name_user": name_user.full_name
+            })
+            if uesr_service.Services.id_verifier:
+                name_verifier = get_info_by_id_user(
+                    uesr_service.Services.id_verifier
+                )
+                service.update({"name_verifier": name_verifier.full_name})
+            else:
+                service.update({"name_verifier": "null"})
+            respon.append(service)
+
         return respon
 
     def get_all_by_condition(condition: int):
